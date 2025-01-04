@@ -1,5 +1,6 @@
 package com.example.skylink
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skylink.adapters.EstacionesAdapter
@@ -38,6 +39,8 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
             inputEnd = input
             //TODO iniciar el cálculo de los grafos
             println("Se debería dar inicio a Dijkstra con los nodos $inputBegin y $inputEnd")
+            val intent = Intent(this, ResultActivity::class.java)
+            startActivity(intent)
         }
     }
 

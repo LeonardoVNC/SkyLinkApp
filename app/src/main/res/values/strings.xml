@@ -18,4 +18,13 @@
     <string name="item_terminal_def">Nombre de la estación</string>
     <string name="terminal_text_begin">Seleccione su estación actual</string>
     <string name="terminal_text_end">Seleccione su estación objetivo</string>
+
+    <!-- Resultado -->
+    <string name="result_desc">Los resultados son los siguientes:</string>
+    <string name="result_time_desc">El tiempo necesario para completar su trayecto es de</string>
+    <string name="result_time">minutos</string>
+    <string name="result_price_desc">El precio a pagar por su trayecto es de</string>
+    <string name="result_price">Bs</string>
+    <string name="result_route">Su trayecto está conformado por las siguientes estaciones</string>
+    <string name="result_button_reset">Volver al inicio</string>
 </resources>
