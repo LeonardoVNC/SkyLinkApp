@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skylink.OnStationClickListener
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ItemTerminalBinding
 
-class EstacionesAdapter: RecyclerView.Adapter<EstacionesAdapter.EstacionViewHolder>() {
+class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerView.Adapter<EstacionesAdapter.EstacionViewHolder>() {
     private val datos = mutableListOf<Estacion>()
     private var context: Context?=null
 
@@ -29,6 +30,10 @@ class EstacionesAdapter: RecyclerView.Adapter<EstacionesAdapter.EstacionViewHold
         fun binding(data: Estacion){
             binding.itemTerminalDesc.text = data.nombre
             binding.itemTerminalImage.setColorFilter(ContextCompat.getColor(context!!, data.color))
+            // Configura el listener para el clic
+            binding.root.setOnClickListener {
+                listener.onItemClick(data.inputID) // Suponiendo que 'id' es el int que deseas enviar
+            }
         }
     }
 

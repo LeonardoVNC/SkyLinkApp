@@ -14,6 +14,8 @@
     <string name="main_desc_time">Optimizar Tiempo</string>
     <string name="main_desc_price">Optimizar Precio</string>
 
-    <!-- Main Activity -->
+    <!-- Selector de estaciones -->
     <string name="item_terminal_def">Nombre de la estación</string>
+    <string name="terminal_text_begin">Seleccione su estación actual</string>
+    <string name="terminal_text_end">Seleccione su estación objetivo</string>
 </resources>

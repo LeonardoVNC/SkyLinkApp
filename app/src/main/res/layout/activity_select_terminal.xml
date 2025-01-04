@@ -28,12 +28,24 @@
             app:tint="?attr/editTextColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Menú superior -->
+    <!-- Texto Descripción -->
+    <TextView
+        android:id="@+id/terminal_description"
+        style="@style/SubtitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:layout_constraintTop_toBottomOf="@id/terminal_upper_menu"
+        app:layout_constraintBottom_toTopOf="@id/terminal_recycler"
+        android:text="@string/terminal_text_begin"
+        android:gravity="center"/>
+
+    <!-- Contenido Principal -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/terminal_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/terminal_upper_menu"
+        app:layout_constraintTop_toBottomOf="@id/terminal_description"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
