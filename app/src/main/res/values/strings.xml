@@ -13,4 +13,7 @@
     <!-- Main Activity -->
     <string name="main_desc_time">Optimizar Tiempo</string>
     <string name="main_desc_price">Optimizar Precio</string>
+
+    <!-- Main Activity -->
+    <string name="item_terminal_def">Nombre de la estación</string>
 </resources>

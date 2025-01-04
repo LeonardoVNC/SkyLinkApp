@@ -20,6 +20,8 @@ class MainActivity : BaseActivity() {
 
         binding.mainButtonTime.setOnClickListener{
             //TODO acceder al menú de selección de estaciones
+            val intent = Intent(this, SelectTerminalActivity::class.java)
+            startActivity(intent)
         }
 
         binding.mainButtonPrice.setOnClickListener{
