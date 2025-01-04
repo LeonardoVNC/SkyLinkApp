@@ -2,9 +2,6 @@ package com.example.skylink
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.skylink.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
@@ -16,9 +13,17 @@ class MainActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.principalButtonMenu.setOnClickListener{
+        binding.mainButtonMenu.setOnClickListener{
             val intent = Intent(this, SelectThemeActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.mainButtonTime.setOnClickListener{
+            //TODO acceder al menú de selección de estaciones
+        }
+
+        binding.mainButtonPrice.setOnClickListener{
+            //TODO pensar si acceder al selector de tipo de cliente o si eso se define dentro de las configuraciones
         }
     }
 }

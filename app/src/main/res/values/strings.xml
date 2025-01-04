@@ -9,4 +9,8 @@
     <string name="theme_dark_purple">Morado (Oscuro)</string>
     <string name="theme_dark">Oscuro</string>
     <string name="theme_light">Claro</string>
+
+    <!-- Main Activity -->
+    <string name="main_desc_time">Optimizar Tiempo</string>
+    <string name="main_desc_price">Optimizar Precio</string>
 </resources>
