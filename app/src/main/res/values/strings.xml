@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SkyLink</string>
+
+    <!-- Selector de temas -->
+    <string name="desc_themes">Seleccione un tema:</string>
+    <string name="desc_save_theme">Seleccionado: </string>
+    <string name="save_themes">Guardar Tema</string>
+    <string name="theme_dark_tur">Turquesa (Oscuro)</string>
+    <string name="theme_dark_purple">Morado (Oscuro)</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_light">Claro</string>
 </resources>
