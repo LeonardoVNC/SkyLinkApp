@@ -23,9 +23,5 @@ class MainActivity : BaseActivity() {
             val intent = Intent(this, SelectTerminalActivity::class.java)
             startActivity(intent)
         }
-
-        binding.mainButtonPrice.setOnClickListener{
-            //TODO pensar si acceder al selector de tipo de cliente o si eso se define dentro de las configuraciones
-        }
     }
 }

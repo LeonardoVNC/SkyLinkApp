@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toEndOf="@id/item_terminal_image"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="@string/main_desc_price"/>
+                android:text="@string/main_desc_time"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>

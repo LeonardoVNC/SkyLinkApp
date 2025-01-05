@@ -40,28 +40,26 @@
 
         <ImageView
             android:id="@+id/main_image"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"
+            android:src="@drawable/hugeicons__cable_car"/>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:layout_margin="20dp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="@string/main_desc"/>
 
         <Button
             android:id="@+id/main_button_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="50dp"
+            android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:text="@string/main_desc_time"/>
-
-        <Button
-            android:id="@+id/main_button_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="50dp"
-            android:padding="10dp"
-            android:text="@string/main_desc_price" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
