@@ -17,6 +17,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     companion object {
         val ID_INPUT_BEGIN = "INPUT_BEGIN"
         val ID_INPUT_END = "INPUT_END"
+        val LIST_ESTACIONES = mutableListOf<Estacion>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +91,8 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
             Estacion(nombre = "Faro Murillo", color = R.color.morada, 24),
             Estacion(nombre = "Obelisco", color = R.color.morada, 25),
         )
+        LIST_ESTACIONES.clear()
+        LIST_ESTACIONES.addAll(listaDeDatos)
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
         binding.terminalRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
