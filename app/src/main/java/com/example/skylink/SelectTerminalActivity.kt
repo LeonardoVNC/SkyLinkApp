@@ -14,6 +14,11 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     private var inputBegin: Int = -1
     private var inputEnd: Int = -1
 
+    companion object {
+        val ID_INPUT_BEGIN = "INPUT_BEGIN"
+        val ID_INPUT_END = "INPUT_END"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectTerminalBinding.inflate(layoutInflater)
@@ -28,7 +33,6 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
                 setBeginInput()
             }
         }
-
     }
 
     override fun onItemClick(input: Int) {
@@ -37,9 +41,9 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
             setEndInput()
         } else {
             inputEnd = input
-            //TODO iniciar el cálculo de los grafos
-            println("Se debería dar inicio a Dijkstra con los nodos $inputBegin y $inputEnd")
             val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(ID_INPUT_BEGIN, inputBegin)
+            intent.putExtra(ID_INPUT_END, inputEnd)
             startActivity(intent)
         }
     }
