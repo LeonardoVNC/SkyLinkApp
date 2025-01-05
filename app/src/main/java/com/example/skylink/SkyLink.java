@@ -5,14 +5,14 @@ import java.util.*;
 public class SkyLink {
     static LinkedList<int[]>[] grafo;
     static Set<Integer>[] lineas;
-    static int numLineas;
+    static int numLineas = 10;
 
     static int pAbordaje;
     static int pTransbordo;
 
     //Método encargado de definir el precio de abordo y transbordo según el tipo
     //Los precios se cuentan en centavos
-    public static void setTipoCliente(int type) {
+    public void setTipoCliente(int type) {
         if (type == 1) {
             pAbordaje = 300;
             pTransbordo = 200;
@@ -288,9 +288,9 @@ public class SkyLink {
     static boolean[] vis;   //Arreglo que se encarga de no re visitar nodos
     static int[] padre;     //Arreglo que guarda el nodo padre de cada nodo
 
-    public static void optimizacionPrecio(int nodoInicial, int nodoObjetivo) {
+    public double[] optimizacionPrecio(int nodoInicial, int nodoObjetivo) {
         if (nodoInicial == nodoObjetivo) { //Dado el caso de viaje al mismo lugar, no se ejecuta el algoritmo
-            System.out.println("Ya te encuentras en tu destino, el precio a pagar es 0 Bs");
+            return new double[]{0.0};
         } else {
             Queue<Integer> kiwi = new LinkedList<>(); //Se crea una cola para el BFS
             nivel = new int[grafo.length];      //Se instancian los arreglos con el tamaño requerido
@@ -322,14 +322,19 @@ public class SkyLink {
             }
             if (!vis[nodoObjetivo]) { //Si no se llegó a visitar al nodo Objetivo...
                 System.out.println("No se puede llegar de  " + estNomb(nodoInicial) + " a " + estNomb(nodoObjetivo));
+                return new double[]{-1.0};
             } else {
+                double [] respuesta = new double[grafo.length];
+                Arrays.fill(respuesta,-1.0);
                 Set<Integer> set = new HashSet<>(); //Se crea un set que guarda las líneas que comprenden el recorrido
-                System.out.print("El camino comprende las estaciones " + estNomb(nodoObjetivo));
+                respuesta[1] = nodoObjetivo;
                 int nodoActual = nodoObjetivo;
+                int j = 2;
                 for (int i = 1; i < nivel[nodoObjetivo]; i++) {         //Mientras se recorre el camino para ir imprimiendo el recorrido
                     set.add(mismaLinea(nodoActual, padre[nodoActual])); //se almacena en un set todas las líneas por las que se pasó
                     nodoActual = padre[nodoActual];
-                    System.out.print(", " + estNomb(nodoActual));
+                    respuesta[j] = nodoActual;
+                    j++;
                 }
                 int costo = 0;                          //Se crea una variable costo
                 for (int i = 0; i < set.size(); i++) {  //que recorriendo todo el tamaño del set
@@ -340,7 +345,8 @@ public class SkyLink {
                     }
                 }
                 //Se castea a double el costo y se divide entre 100 para obtener el precio en Bs y no en centavos
-                System.out.println(". Con un precio total de " + ((double) (costo) / 100) + "Bs"); 
+                respuesta[0] =((double) (costo) / 100);
+                return respuesta;
             }
         }
     }

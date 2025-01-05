@@ -42,6 +42,24 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         }
 
         //Calcular el precio
+        miSkyLink.setTipoCliente(2)
+        val respuestaPrecio = miSkyLink.optimizacionPrecio(nodoInicial, nodoFinal)
+        val precio = respuestaPrecio[0]
+        if (precio == -1.0) {
+            println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+            startActivity(intent)
+        }else {
+            binding.resultPrice.text = "$precio ${getString(R.string.result_price)}"
+        }
+
+        //Comprobar misma ruta
+        for (estacion in 1 until respuestaTiempo.size) {
+            if (respuestaTiempo[estacion].toDouble() != respuestaPrecio[estacion]){
+                println("Puede que exista inconcordia en los caminos, verifica que el precio y la ruta proporcionada concuerden")
+            }
+        }
 
         //Mostrar la ruta recorrida
         val recorrido = mutableListOf<Estacion>()
