@@ -17,7 +17,34 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     companion object {
         val ID_INPUT_BEGIN = "INPUT_BEGIN"
         val ID_INPUT_END = "INPUT_END"
-        val LIST_ESTACIONES = mutableListOf<Estacion>()
+        val LIST_ESTACIONES = mutableListOf(
+            Estacion(nombre = "Rio Seco", color = R.color.azul,0),
+            Estacion(nombre = "UPEA", color = R.color.azul,1),
+            Estacion(nombre = "Plaza La Paz", color = R.color.azul, 2),
+            Estacion(nombre = "Plaza Libertad", color = R.color.azul, 3),
+            Estacion(nombre = "16 de Julio", color = R.color.roja, 4),
+            Estacion(nombre = "Cementerio", color = R.color.roja, 5),
+            Estacion(nombre = "Central", color = R.color.roja, 6),
+            Estacion(nombre = "Armentia", color = R.color.naranja, 7),
+            Estacion(nombre = "Periferica", color = R.color.naranja, 8),
+            Estacion(nombre = "Villarroel", color = R.color.blanca, 9),
+            Estacion(nombre = "Busch", color = R.color.blanca, 10),
+            Estacion(nombre = "Triangular", color = R.color.blanca, 11),
+            Estacion(nombre = "Del Poeta", color = R.color.celeste, 12),
+            Estacion(nombre = "Las Villas", color = R.color.cafe, 13),
+            Estacion(nombre = "El Prado", color = R.color.celeste, 14),
+            Estacion(nombre = "Teatro al Aire Libre", color = R.color.celeste, 15),
+            Estacion(nombre = "Libertador", color = R.color.amarilla, 16),
+            Estacion(nombre = "Alto Obrajes", color = R.color.verde, 17),
+            Estacion(nombre = "Obrajes", color = R.color.verde, 18),
+            Estacion(nombre = "Irpavi", color = R.color.verde, 19),
+            Estacion(nombre = "Sopocachi", color = R.color.amarilla, 20),
+            Estacion(nombre = "Buenos Aires", color = R.color.amarilla, 21),
+            Estacion(nombre = "Mirador", color = R.color.amarilla, 22),
+            Estacion(nombre = "6 de Marzo", color = R.color.morada, 23),
+            Estacion(nombre = "Faro Murillo", color = R.color.morada, 24),
+            Estacion(nombre = "Obelisco", color = R.color.morada, 25),
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,38 +88,24 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         binding.terminalDescription.text = getString(R.string.terminal_text_end)
     }
 
+    val lineaConPrioridad = mapOf(
+        R.color.roja to 1,
+        R.color.amarilla to 2,
+        R.color.verde to 3,
+        R.color.celeste to 4,
+        R.color.blanca to 5,
+        R.color.morada to 6,
+        R.color.naranja to 7,
+        R.color.azul to 8,
+        R.color.cafe to 9,
+        R.color.plateada to 10
+    )
+
     //Función que carga todos los items del RecyclerView
     private fun setUpRecyclerView() {
-        val listaDeDatos = mutableListOf(
-            Estacion(nombre = "Rio Seco", color = R.color.azul,0),
-            Estacion(nombre = "UPEA", color = R.color.azul,1),
-            Estacion(nombre = "Plaza La Paz", color = R.color.azul, 2),
-            Estacion(nombre = "Plaza Libertad", color = R.color.azul, 3),
-            Estacion(nombre = "16 de Julio", color = R.color.roja, 4),
-            Estacion(nombre = "Cementerio", color = R.color.roja, 5),
-            Estacion(nombre = "Central", color = R.color.roja, 6),
-            Estacion(nombre = "Armentia", color = R.color.naranja, 7),
-            Estacion(nombre = "Periferica", color = R.color.naranja, 8),
-            Estacion(nombre = "Villarroel", color = R.color.blanca, 9),
-            Estacion(nombre = "Busch", color = R.color.blanca, 10),
-            Estacion(nombre = "Triangular", color = R.color.blanca, 11),
-            Estacion(nombre = "Del Poeta", color = R.color.celeste, 12),
-            Estacion(nombre = "Las Villas", color = R.color.cafe, 13),
-            Estacion(nombre = "El Prado", color = R.color.celeste, 14),
-            Estacion(nombre = "Teatro al Aire Libre", color = R.color.celeste, 15),
-            Estacion(nombre = "Libertador", color = R.color.amarilla, 16),
-            Estacion(nombre = "Alto Obrajes", color = R.color.verde, 17),
-            Estacion(nombre = "Obrajes", color = R.color.verde, 18),
-            Estacion(nombre = "Irpavi", color = R.color.verde, 19),
-            Estacion(nombre = "Sopocachi", color = R.color.amarilla, 20),
-            Estacion(nombre = "Buenos Aires", color = R.color.amarilla, 21),
-            Estacion(nombre = "Mirador", color = R.color.amarilla, 22),
-            Estacion(nombre = "6 de Marzo", color = R.color.morada, 23),
-            Estacion(nombre = "Faro Murillo", color = R.color.morada, 24),
-            Estacion(nombre = "Obelisco", color = R.color.morada, 25),
-        )
-        LIST_ESTACIONES.clear()
-        LIST_ESTACIONES.addAll(listaDeDatos)
+        val listaDeDatos = mutableListOf<Estacion>()
+        listaDeDatos.addAll(LIST_ESTACIONES)
+        listaDeDatos.sortWith(compareBy { lineaConPrioridad[it.color] ?: Int.MAX_VALUE })
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
         binding.terminalRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
