@@ -14,12 +14,11 @@ class MainActivity : BaseActivity() {
         setContentView(view)
 
         binding.mainButtonMenu.setOnClickListener{
-            val intent = Intent(this, SelectThemeActivity::class.java)
+            val intent = Intent(this, ConfiguracionesActivity::class.java)
             startActivity(intent)
         }
 
         binding.mainButtonTime.setOnClickListener{
-            //TODO acceder al menú de selección de estaciones
             val intent = Intent(this, SelectTerminalActivity::class.java)
             startActivity(intent)
         }

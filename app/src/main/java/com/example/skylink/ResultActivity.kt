@@ -3,6 +3,7 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skylink.SelectPricesActivity.Companion.ID_SELECTED_PRICE
 import com.example.skylink.SelectTerminalActivity.Companion.ID_INPUT_BEGIN
 import com.example.skylink.SelectTerminalActivity.Companion.ID_INPUT_END
 import com.example.skylink.SelectTerminalActivity.Companion.LIST_ESTACIONES
@@ -27,6 +28,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
 
         val miSkyLink = SkyLink()
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
         miSkyLink.inicializarGrafo()
 
         //Calcular el tiempo
@@ -42,7 +44,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         }
 
         //Calcular el precio
-        miSkyLink.setTipoCliente(2)
+        miSkyLink.setTipoCliente(sharedPreferences.getInt(ID_SELECTED_PRICE, 1))
         val respuestaPrecio = miSkyLink.optimizacionPrecio(nodoInicial, nodoFinal)
         val precio = respuestaPrecio[0]
         if (precio == -1.0) {
