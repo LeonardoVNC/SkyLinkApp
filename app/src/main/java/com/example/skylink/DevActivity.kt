@@ -19,6 +19,7 @@ class DevActivity : BaseActivity() {
         binding.devButtonBack.setOnClickListener{ onBackPressed() }
         binding.devButtonAccept.setOnClickListener{
             binding.devDesc.visibility = View.VISIBLE
+            binding.devA.visibility = View.GONE
             if (binding.devCmd.text.isNotEmpty()) {
                 when (binding.devCmd.text.toString()) {
                     "show set" -> {
@@ -28,6 +29,10 @@ class DevActivity : BaseActivity() {
                     "show graph" -> {
                         skyLink.mostrarGrafo()
                         binding.devDesc.text = getString(R.string.dev_graph)
+                    }
+                    "17 04" -> {
+                        binding.devDesc.visibility = View.GONE
+                        binding.devA.visibility = View.VISIBLE
                     }
                     else -> {
                         binding.devDesc.text = getString(R.string.dev_wrongcmd)
