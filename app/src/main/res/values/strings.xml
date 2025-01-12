@@ -25,6 +25,14 @@
     <string name="theme_dark">Oscuro</string>
     <string name="theme_light">Claro</string>
 
+    <!-- Opciones de desarrollo -->
+    <string name="dev_title">Opciones de desarollo</string>
+    <string name="dev_cmd_desc">Ingrese un comando</string>
+    <string name="dev_desc">Descripción default</string>
+    <string name="dev_wrongcmd">Ingrese un comando válido para continuar</string>
+    <string name="dev_set">Set de líneas detallado en el LogCat</string>
+    <string name="dev_graph">Grafo de estaciones detallado en el LogCat</string>
+
     <!-- Main Activity -->
     <string name="main_desc_time">Optimizar Ruta</string>
     <string name="main_desc">Busque la mejor manera de llegar a su destino usando los teleféricos de la ciudad de La Paz.\n\nEsta app busca encontrar la ruta más óptima para llegar a su estación objetivo, estimando el tiempo que toma el trayecto y calculando el precio a pagar.\n\nPuede elegir los precios que se usarán dentro de la app en el menú de configuraciones ubicado en la parte superior.\n\nPresione el botón ubicado en la parte inferior para empezar a optimizar su ruta.</string>

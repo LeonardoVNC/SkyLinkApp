@@ -364,7 +364,7 @@ public class SkyLink {
     // TEST - Métodos empleados para verificación de estructuras de datos durante el desarrollo
 
     //Método que muestra cada nodo con sus respectivas líneas
-    public static void verificarSetLineas() {
+    public void verificarSetLineas() {
         for (int i = 0; i < grafo.length; i++) {
             Integer[] arr = lineas[i].toArray(new Integer[0]); //Se convierten los sets en arreglos
             System.out.print("El nodo " + i + " pertenece a las líneas: ");
@@ -373,7 +373,7 @@ public class SkyLink {
     }
 
     //Método para mostrar un grafo ponderado
-    public static void mostrarGrafo() {
+    public void mostrarGrafo() {
         for (int i = 0; i < grafo.length; i++) {
             System.out.print("Nodo " + i + ": ");
             for (int j = 0; j < grafo[i].size(); j++) {

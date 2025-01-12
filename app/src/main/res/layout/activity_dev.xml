@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dev"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill_vertical"
+    tools:context=".DevActivity">
+
+    <!-- Menú superior -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dev_upper_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSecondary"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/dev_button_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/editTextColor" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Contenido Principal -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dev_upper_menu">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <!-- Título -->
+            <TextView
+                style="@style/SubtitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@android:color/transparent"
+                android:text="@string/dev_title"/>
+            <!-- Ingreso de comando -->
+            <EditText
+                android:id="@+id/dev_cmd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dev_cmd_desc"
+                android:maxLines="1"/>
+            <!-- Boton siguiente -->
+            <ImageButton
+                android:id="@+id/dev_button_accept"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/arrow"
+                android:background="@android:color/transparent"
+                app:tint="?attr/colorPrimary" />
+            <!-- Descripción -->
+            <TextView
+                android:id="@+id/dev_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
+                android:text="@string/dev_desc"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

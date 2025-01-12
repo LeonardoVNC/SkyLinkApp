@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DarkTur"
         tools:targetApi="31">
         <activity
+            android:name=".DevActivity"
+            android:exported="false" />
+        <activity
             android:name=".SelectPricesActivity"
             android:exported="false" />
         <activity

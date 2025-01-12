@@ -23,8 +23,7 @@ class ConfiguracionesActivity : BaseActivity() {
             startActivity(intent)
         }
         binding.configButtonDev.setOnClickListener{
-            //TODO hacer la activity adecuada
-            val intent = Intent(this, SelectThemeActivity::class.java)
+            val intent = Intent(this, DevActivity::class.java)
             startActivity(intent)
         }
     }
