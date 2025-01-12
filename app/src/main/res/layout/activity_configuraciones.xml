@@ -91,10 +91,12 @@
 
         <!-- Dev -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/config_dev"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="?attr/colorSurface"
+            android:visibility="gone"
             android:padding="10dp">
             <TextView
                 style="@style/SubtitleText"

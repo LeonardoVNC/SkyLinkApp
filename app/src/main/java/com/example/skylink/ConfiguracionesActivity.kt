@@ -2,6 +2,8 @@ package com.example.skylink
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import com.example.skylink.MainActivity.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityConfiguracionesBinding
 
 class ConfiguracionesActivity : BaseActivity() {
@@ -12,6 +14,10 @@ class ConfiguracionesActivity : BaseActivity() {
         binding = ActivityConfiguracionesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        if (sharedPreferences.getInt(ID_USER_TYPE, 0) == 1) {
+            binding.configDev.visibility = View.VISIBLE
+        }
 
         binding.configButtonBack.setOnClickListener{ onBackPressed() }
         binding.configButtonPrice.setOnClickListener{
