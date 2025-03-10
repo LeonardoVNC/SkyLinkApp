@@ -20,15 +20,15 @@ class SelectPricesActivity : BaseActivity() {
 
         binding.selectPriceButtonBack.setOnClickListener{ onBackPressed() }
         binding.selectPriceCommonButton.setOnClickListener{
-            sharedPreferences.edit().putInt(ID_SELECTED_PRICE, 1).apply()
+            sharedPreferences.edit().putString(ID_SELECTED_PRICE, "Estándar").apply()
             Toast.makeText(this, "Seleccionado el precio estándar", Toast.LENGTH_SHORT).show()
         }
         binding.selectPriceStudentButton.setOnClickListener{
-            sharedPreferences.edit().putInt(ID_SELECTED_PRICE, 2).apply()
+            sharedPreferences.edit().putString(ID_SELECTED_PRICE, "Estudiante").apply()
             Toast.makeText(this, "Seleccionado el precio estudiantil", Toast.LENGTH_SHORT).show()
         }
         binding.selectPriceAdultButton.setOnClickListener{
-            sharedPreferences.edit().putInt(ID_SELECTED_PRICE, 3).apply()
+            sharedPreferences.edit().putString(ID_SELECTED_PRICE, "Adulto mayor").apply()
             Toast.makeText(this, "Seleccionado el precio de adulto mayor", Toast.LENGTH_SHORT).show()
         }
     }

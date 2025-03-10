@@ -13,7 +13,7 @@ class DevActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        val skyLink = SkyLink()
+        val skyLink = SkyLink("Estándar")
         skyLink.inicializarGrafo()
 
         binding.devButtonBack.setOnClickListener{ onBackPressed() }

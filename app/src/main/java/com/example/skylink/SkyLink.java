@@ -1,97 +1,42 @@
 package com.example.skylink;
 
+import com.example.skylink.customDataStructures.Dupla_IntArrDouble;
+
 import java.util.*;
 
 public class SkyLink {
-    static LinkedList<int[]>[] grafo;
-    static Set<Integer>[] lineas;
-    static int numLineas = 10;
+    //Parámetros para la inicialización de la clase
+    private LinkedList<int[]>[] grafo;
+    private Set<Integer>[] lineas;
+    private Map<Integer, String> nombreEstaciones;
+    private int nodos = 26;
+    private int numLineas = 10;
+    private double pAbordaje;
+    private double pTransbordo;
 
-    static int pAbordaje;
-    static int pTransbordo;
+    //Parámetros para la lógica del algoritmo Dijkstra
+    private final int INF = Integer.MAX_VALUE;
+    private int[] dist;             //Arreglo que guardará la distancia entre el nodo de inicio y el resto de nodos
+    private int[] padreDijkstra;    //Arreglo que guardará al nodo del que viene el camino con menor peso
 
-    //Método encargado de definir el precio de abordo y transbordo según el tipo
-    //Los precios se cuentan en centavos
-    public void setTipoCliente(int type) {
-        if (type == 1) {
-            pAbordaje = 300;
-            pTransbordo = 200;
-        } else if (type == 2 || type == 3) {
-            pAbordaje = 150;
-            pTransbordo = 100;
-        }
-    }
-
-    //Método que devuelve el nombre de la estación a la que pertenece el nodo n
-    public static String estNomb(int n) {
-        switch (n) {
-            case 0:
-                return "Río Seco";
-            case 1:
-                return "UPEA";
-            case 2:
-                return "Plaza La Paz";
-            case 3:
-                return "Plaza La Libertad";
-            case 4:
-                return "16 de Julio";
-            case 5:
-                return "Cementerio";
-            case 6:
-                return "Central";
-            case 7:
-                return "Armentia";
-            case 8:
-                return "Periférico";
-            case 9:
-                return "Villarroel";
-            case 10:
-                return "Busch";
-            case 11:
-                return "Triangular";
-            case 12:
-                return "Del Poeta";
-            case 13:
-                return "Las Villas";
-            case 14:
-                return "Prado";
-            case 15:
-                return "Teatro al Aire Libre";
-            case 16:
-                return "Libertador";
-            case 17:
-                return "Alto Obrajes";
-            case 18:
-                return "Obrajes";
-            case 19:
-                return "Irpavi";
-            case 20:
-                return "Sopocachi";
-            case 21:
-                return "Buenos Aires";
-            case 22:
-                return "Mirador";
-            case 23:
-                return "6 de Marzo";
-            case 24:
-                return "Faro Murillo";
-            case 25:
-                return "Obelisco";
-            default:
-                return "Error en el id de la estación, verifique el método nombEstacion en la Clase SkyLink";
-        }
+    public SkyLink (String tipoCliente) {
+        grafo = new LinkedList[nodos];
+        lineas = new HashSet[nodos];
+        inicializarGrafo();
+        inicializarNombreEstaciones();
+        setTipoCliente(tipoCliente);
     }
 
     //Método encargado de estructurar todo el grafo, es no dirigido y tiene ponderación
     public void inicializarGrafo() {
-        int nodos = 26;
-        grafo = new LinkedList[nodos];
-        lineas = new HashSet[nodos];
-        for (int i = 0; i < nodos; i++) { //Instanciamos una estructura de datos en cada posición del arreglo
+        //Instanciamos una estructura de datos en cada posición del arreglo
+        for (int i = 0; i < nodos; i++) {
             lineas[i] = new HashSet<>();
             grafo[i] = new LinkedList<int[]>();
         }
 
+        //Se llenan los datos del grafo
+        //Si grafo[a].add(new int[]{b, c}); => a=nodo origen, b=nodo destino, c=tiempo o ponderación
         grafo[0].add(new int[]{1, 7});
 
         grafo[1].add(new int[]{0, 7});
@@ -170,6 +115,7 @@ public class SkyLink {
 
         grafo[25].add(new int[]{24,8});
 
+        //Se seleccionan las líneas a las que pertencen los distintos nodos o estaciones
         lineas[0].add(0);
 
         lineas[1].add(0);
@@ -233,126 +179,130 @@ public class SkyLink {
         lineas[25].add(9);
     }
 
-    static final int INF = Integer.MAX_VALUE; //Definimos infinito como el número más alto en java (para ints)
-    static int[] dist; //Arreglo que guardará la distancia entre el nodo de inicio y el resto de nodos
-    static int[] padreDijkstra; //Arreglo que guardará al nodo del que viene el camino con menor peso
+    //Método encargado de asignar un nombre a cada uno de los nodos o estaciones
+    public void inicializarNombreEstaciones() {
+        nombreEstaciones = new HashMap<>();
+        nombreEstaciones.put(0, "Río Seco");
+        nombreEstaciones.put(1, "UPEA");
+        nombreEstaciones.put(2, "Plaza La Paz");
+        nombreEstaciones.put(3, "Plaza La Libertad");
+        nombreEstaciones.put(4, "16 de Julio");
+        nombreEstaciones.put(5, "Cementerio");
+        nombreEstaciones.put(6, "Central");
+        nombreEstaciones.put(7, "Armentia");
+        nombreEstaciones.put(8, "Periférica");
+        nombreEstaciones.put(9, "Villarroel");
+        nombreEstaciones.put(10, "Busch");
+        nombreEstaciones.put(11, "Triangular");
+        nombreEstaciones.put(12, "Del Poeta");
+        nombreEstaciones.put(13, "Las Villas");
+        nombreEstaciones.put(14, "Prado");
+        nombreEstaciones.put(15, "Teatro al Aire Libre");
+        nombreEstaciones.put(16, "Libertador");
+        nombreEstaciones.put(17, "Alto Obrajes");
+        nombreEstaciones.put(18, "Obrajes");
+        nombreEstaciones.put(19, "Irpavi");
+        nombreEstaciones.put(20, "Sopocachi");
+        nombreEstaciones.put(21, "Buenos Aires");
+        nombreEstaciones.put(22, "Mirador");
+        nombreEstaciones.put(23, "6 de Marzo");
+        nombreEstaciones.put(24, "Faro Murillo");
+        nombreEstaciones.put(25, "Obelisco");
+    }
 
-    public int[] optimizacionTiempo(int nodoInicial, int nodoObjetivo) {
-        dist = new int[grafo.length];           //Instanciamos los 2 arreglos
-        padreDijkstra = new int[grafo.length];  //Con el numero de nodos que hay
-        Arrays.fill(dist, INF); //Se llena el arreglo de distancias con infinito para luego compararlo
-        Comparator<int[]> comparator = (a, b) -> a[0] - b[0];       //Se instancia la cola de prioridad
-        PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);  //Por defecto da prioridad al número más bajo
-        dist[nodoInicial] = 0; //La distancia desde el nodo inicial es 0
-        padreDijkstra[nodoInicial] = -1; //El nodo inicial no tiene un nodo padre
-        pq.add(new int[] { 0, nodoInicial }); //Se añade a la cola un arreglo con la distancia en 0 y el nodo inicial
-        while (!pq.isEmpty()) { //Se sigue el algoritmo de Dijkstra mientras la cola no este vacía
-            int pesoActual = pq.peek()[0];  //Se guarda el peso y el nodo relacionado
-            int nodoActual = pq.peek()[1];  //del frente de la cola de prioridad
-            pq.poll();                      //una vez guardada la información se descarta al arreglo
-            if (pesoActual > dist[nodoActual])  //Si el peso del frente es mayor a la distancia del nodo del frente
-                continue;                       //se corta este caso del while y se sigue con el siguiente
-            for (int i = 0; i < grafo[nodoActual].size(); i++) { //Evaluamos a los vecinos del nodo del frente
+    //Método que devuelve el valor asignado del map nombreEstaciones
+    public String estNomb(int key) {
+        if (!nombreEstaciones.containsKey(key)) {
+            System.out.println("Error en estNomb, verica la key y el estado del map nombreEstaciones.");
+            return "";
+        }
+        return nombreEstaciones.get(key);
+    }
+
+    //Método encargado de definir el precio de abordo y transbordo según el tipo de cliente
+    public void setTipoCliente(String tipoCliente) {
+        switch (tipoCliente) {
+            case "Estándar": {
+                pAbordaje = 3.0;
+                pTransbordo = 2.0;
+                break;
+            }
+            case "Estudiante": {
+                pAbordaje = 1.5;
+                pTransbordo = 1.0;
+                break;
+            }
+            case "Adulto mayor": {
+                pAbordaje = 1.5;
+                pTransbordo = 1;
+                break;
+            }
+            default: {
+                System.out.println("Parámetro inválido en setTipoCliente");
+                break;
+            }
+        }
+    }
+
+    public Dupla_IntArrDouble optimizarRuta(int nodoInicial, int nodoObjetivo) {
+        if (nodoInicial == nodoObjetivo) {
+            System.out.println("Ruta a la misma estación, no hay costo ni ruta.");
+            return new Dupla_IntArrDouble(new int[]{nodoInicial}, 0);
+        }
+        dist = new int[grafo.length];
+        padreDijkstra = new int[grafo.length];
+        Arrays.fill(dist, INF);     //Se llena el arreglo de distancias con infinito para luego compararlo
+        Comparator<int[]> comparator = (a, b) -> a[0] - b[0];           //Se instancia la cola de prioridad
+        PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);      //Por defecto da prioridad al número más bajo
+        dist[nodoInicial] = 0;                          //La distancia desde el nodo inicial es 0
+        padreDijkstra[nodoInicial] = -1;                //El nodo inicial no tiene un nodo padre
+        pq.add(new int[] { 0, nodoInicial });           //Se añade a la cola un arreglo con la distancia en 0 y el nodo inicial
+        while (!pq.isEmpty()) {                         //Se sigue el algoritmo de Dijkstra mientras la cola no este vacía
+            int pesoActual = pq.peek()[0];              //Se guarda el peso y el nodo relacionado
+            int nodoActual = pq.peek()[1];              //del frente de la cola de prioridad
+            pq.poll();                                  //una vez guardada la información se descarta al arreglo
+            if (pesoActual > dist[nodoActual])          //Si el peso del frente es mayor a la distancia del nodo del frente
+                continue;                               //se corta este caso del while y se sigue con el siguiente
+            for (int i = 0; i < grafo[nodoActual].size(); i++) {        //Evaluamos a los vecinos del nodo del frente
                 int siguienteNodo = grafo[nodoActual].get(i)[0];
                 int peso = grafo[nodoActual].get(i)[1];
-                int siguientePeso = pesoActual + peso; //Se evalua el peso que tomará este camino
-                if (siguientePeso < dist[siguienteNodo]) {  //Si el nuevo camino resulta ser menor, se efectua el Relax
-                    dist[siguienteNodo] = siguientePeso;    //la distancia y el padre se sobreescriben
+                int siguientePeso = pesoActual + peso;                  //Se evalua el peso que tomará este camino
+                if (siguientePeso < dist[siguienteNodo]) {              //Si el nuevo camino resulta ser menor, se efectua el Relax
+                    dist[siguienteNodo] = siguientePeso;                //la distancia y el padre se sobreescriben
                     padreDijkstra[siguienteNodo] = nodoActual;
                     pq.add(new int[] { siguientePeso, siguienteNodo }); //Se agregan los caminos posibles desde el nuevo camino
                 }
             }
         }
-        if (dist[nodoObjetivo] == INF) { //Si nunca visitamos al nodo objetivo, INF no habra sido sobreescrito
-            System.out.println("No se puede llegar de " + estNomb(nodoInicial) + " a " + estNomb(nodoObjetivo));
-            return new int[]{-1};
+        //Si nunca visitamos al nodo objetivo, INF no habra sido sobreescrito
+        if (dist[nodoObjetivo] == INF) {
+            System.out.println("No se puede llegar desde " + estNomb(nodoInicial) + " hasta " + estNomb(nodoObjetivo));
+            return new Dupla_IntArrDouble(new int[]{-1}, -1.0);
         } else {
-            int[] respuesta = new int[grafo.length];
-            Arrays.fill(respuesta,-1);
+            int[] nodosRecorrido = new int[grafo.length];
+            Arrays.fill(nodosRecorrido,-1);
+            Set<Integer> lineasRecorridas = new HashSet<>();
+            double costoRecorrido = 0.0;
 
-            respuesta[0] = dist[nodoObjetivo];
-            respuesta[1] = nodoObjetivo;
+            nodosRecorrido[0] = dist[nodoObjetivo];
+            nodosRecorrido[1] = nodoObjetivo;
 
             int i = nodoObjetivo;
             int j = 2;
-            while (padreDijkstra[i] != -1) { //Se recorre el camino desde el nodo objetivo hasta el nodo inicial (de padre -1)
-                respuesta[j] = padreDijkstra[i];
+            //Se recorre el camino desde el nodo objetivo hasta el nodo inicial (de padre -1)
+            while (padreDijkstra[i] != -1) {
+                lineasRecorridas.add(mismaLinea(i,padreDijkstra[i]));
+                nodosRecorrido[j] = padreDijkstra[i];
                 j++;
                 i = padreDijkstra[i];
             }
-            return respuesta;
-        }
-    }
-
-    static int[] nivel;     //Arreglo encargado de guardar a que nivel pertenece cada estación
-    static boolean[] vis;   //Arreglo que se encarga de no re visitar nodos
-    static int[] padre;     //Arreglo que guarda el nodo padre de cada nodo
-
-    public double[] optimizacionPrecio(int nodoInicial, int nodoObjetivo) {
-        if (nodoInicial == nodoObjetivo) { //Dado el caso de viaje al mismo lugar, no se ejecuta el algoritmo
-            return new double[]{0.0};
-        } else {
-            Queue<Integer> kiwi = new LinkedList<>(); //Se crea una cola para el BFS
-            nivel = new int[grafo.length];      //Se instancian los arreglos con el tamaño requerido
-            vis = new boolean[grafo.length];
-            kiwi.offer(nodoInicial);    //Se agrega el nodo inicial a la cola
-            nivel[nodoInicial] = 1;     //Se define su nivel como 1
-            padre = new int[grafo.length];
-            boolean nodoEncontrado = false; //Boolean usado para terminar el BFS una vez se encuentre al nodo objetivo
-            while (!kiwi.isEmpty() && !nodoEncontrado) {
-                int nodoActual = kiwi.poll(); //Se guarda el frente de la cola
-                if (nodoActual == nodoObjetivo) {   //En caso de haberse encontrado el nodo objetivo
-                    nodoEncontrado = true;          //el boolean cambia a true para cortar el BFS
-                    vis[nodoActual] = true;         //y marcamos el nodo objetivo como visitado
-                    break;
-                }
-                if (!vis[nodoActual]) {     //Si aun no se visita al nodo actual
-                    vis[nodoActual] = true; //Lo marcamos como visitado
-                    for (int i = 0; i < grafo[nodoActual].size(); i++) { //Guardamos a todos sus vecinos
-                        int vecino = grafo[nodoActual].get(i)[0];
-                        if (!vis[vecino]) { //Se agregan a la cola en caso de no haberse visitado aun
-                            kiwi.offer(vecino);
-                            if (nivel[vecino] == 0) { //Si el nivel del nodo vecino aun no se ha definido
-                                nivel[vecino] = nivel[nodoActual] + 1; //se define el nivel del nodo vecino
-                                padre[vecino] = nodoActual;            //y se define al nodo padre
-                            }
-                        }
-                    }
-                }
-            }
-            if (!vis[nodoObjetivo]) { //Si no se llegó a visitar al nodo Objetivo...
-                System.out.println("No se puede llegar de  " + estNomb(nodoInicial) + " a " + estNomb(nodoObjetivo));
-                return new double[]{-1.0};
-            } else {
-                double [] respuesta = new double[grafo.length];
-                Arrays.fill(respuesta,-1.0);
-                Set<Integer> set = new HashSet<>(); //Se crea un set que guarda las líneas que comprenden el recorrido
-                respuesta[1] = nodoObjetivo;
-                int nodoActual = nodoObjetivo;
-                int j = 2;
-                for (int i = 1; i < nivel[nodoObjetivo]; i++) {         //Mientras se recorre el camino para ir imprimiendo el recorrido
-                    set.add(mismaLinea(nodoActual, padre[nodoActual])); //se almacena en un set todas las líneas por las que se pasó
-                    nodoActual = padre[nodoActual];
-                    respuesta[j] = nodoActual;
-                    j++;
-                }
-                int costo = 0;                          //Se crea una variable costo
-                for (int i = 0; i < set.size(); i++) {  //que recorriendo todo el tamaño del set
-                    if (i != 0) {                       //sumara el precio de transbordo a todas las líneas que no sean la primera
-                        costo += pTransbordo;
-                    } else {                            //la primera línea suma el precio de abordo
-                        costo += pAbordaje;
-                    }
-                }
-                //Se castea a double el costo y se divide entre 100 para obtener el precio en Bs y no en centavos
-                respuesta[0] =((double) (costo) / 100);
-                return respuesta;
-            }
+            costoRecorrido = (lineasRecorridas.size()-1)*pTransbordo+pAbordaje;
+            return new Dupla_IntArrDouble(nodosRecorrido, costoRecorrido);
         }
     }
 
     //Método que verifica si 2 nodos pertenecen a una misma línea
-    public static int mismaLinea(int nodoA, int nodoB) {
+    public int mismaLinea(int nodoA, int nodoB) {
         for (int i = 0; i < numLineas; i++) {
             if (lineas[nodoA].contains(i) && lineas[nodoB].contains(i)) {
                 return i;
@@ -362,7 +312,6 @@ public class SkyLink {
     }
 
     // TEST - Métodos empleados para verificación de estructuras de datos durante el desarrollo
-
     //Método que muestra cada nodo con sus respectivas líneas
     public void verificarSetLineas() {
         for (int i = 0; i < grafo.length; i++) {
