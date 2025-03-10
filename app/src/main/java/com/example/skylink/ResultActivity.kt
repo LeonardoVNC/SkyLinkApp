@@ -11,8 +11,6 @@ import com.example.skylink.adapters.EstacionesAdapter
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
 
-
-
 class ResultActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivityResultBinding
     private val recyclerTerminalAdapter by lazy { EstacionesAdapter(this) }
@@ -24,72 +22,58 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
 
+        //Nodos a usar en la optimización de la ruta
         nodoInicial = intent.getIntExtra(ID_INPUT_BEGIN, -1)
         nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
 
-        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        //Instanciación de SkyLink.java
         val precioSeleccionado = sharedPreferences.getString(ID_SELECTED_PRICE, "Estándar")
         val miSkyLink = SkyLink(precioSeleccionado)
 
-        //Respuesta
+        //Respuesta`desde SkyLink
         val respuesta = miSkyLink.optimizarRuta(nodoInicial, nodoFinal);
-        val tiempoArr = respuesta.intArr
+        val tiempo = respuesta.intArr[0]
+        val intArr = respuesta.intArr
         val precio = respuesta.doubleValue
-        tiempoArr.forEach {
-            print("$it,")
+
+        //Establecer el tiempo
+        if (tiempo  == -1) {
+            println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+            startActivity(intent)
+        } else {
+            binding.resultTime.text = "$tiempo ${getString(R.string.result_time)}"
         }
-        println(precio)
 
+        //Establecer el precio
+        if (precio == -1.0) {
+            println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+            startActivity(intent)
+        }else {
+            binding.resultPrice.text = "$precio ${getString(R.string.result_price)}"
+        }
 
+        //Mostrar la ruta recorrida
+        val recorrido = mutableListOf<Estacion>()
+        for (estacion in 1 until intArr.size) {
+            if(intArr[estacion] == -1) {
+                break
+            }
+            recorrido.add(LIST_ESTACIONES.get(intArr[estacion]))
+        }
+        setUpRecyclerView(recorrido)
 
-//        if (tiempo  == -1) {
-//            println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-//            startActivity(intent)
-//        } else {
-//            binding.resultTime.text = "$tiempo ${getString(R.string.result_time)}"
-//        }
-//
-//        //Calcular el precio
-//        miSkyLink.setTipoCliente(sharedPreferences.getInt(, 1))
-//        val respuestaPrecio = miSkyLink.optimizacionPrecio(nodoInicial, nodoFinal)
-//        val precio = respuestaPrecio[0]
-//        if (precio == -1.0) {
-//            println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-//            startActivity(intent)
-//        }else {
-//            binding.resultPrice.text = "$precio ${getString(R.string.result_price)}"
-//        }
-//
-//        //Comprobar misma ruta
-//        for (estacion in 1 until respuestaTiempo.size) {
-//            if (respuestaTiempo[estacion].toDouble() != respuestaPrecio[estacion]){
-//                println("Puede que exista inconcordia en los caminos, verifica que el precio y la ruta proporcionada concuerden")
-//            }
-//        }
-//
-//        //Mostrar la ruta recorrida
-//        val recorrido = mutableListOf<Estacion>()
-//        for (estacion in 1 until respuestaTiempo.size) {
-//            if (respuestaTiempo[estacion] != -1) {
-//                recorrido.add(
-//                    LIST_ESTACIONES.get(respuestaTiempo[estacion])
-//                )
-//            } else {
-//                break
-//            }
-//        }
-//        setUpRecyclerView(recorrido)
-//
-//        binding.resultButtonReset.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-//            startActivity(intent)
-//        }
+        //Button Listeners
+        binding.resultButtonReset.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+            startActivity(intent)
+        }
     }
 
     //Función que carga todos los items del RecyclerView
@@ -102,4 +86,11 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     }
 
     override fun onItemClick(input: Int) {}
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+        startActivity(intent)
+        super.onBackPressed()
+    }
 }
