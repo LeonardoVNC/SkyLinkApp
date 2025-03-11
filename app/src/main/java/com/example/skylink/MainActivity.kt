@@ -3,8 +3,8 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.example.skylink.Singletons.Companion.APP_PREFERENCES
-import com.example.skylink.Singletons.Companion.ID_USER_TYPE
+import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {

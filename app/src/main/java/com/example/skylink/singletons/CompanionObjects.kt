@@ -1,8 +1,9 @@
-package com.example.skylink
+package com.example.skylink.singletons
 
+import com.example.skylink.R
 import com.example.skylink.dataClasses.Estacion
 
-class Singletons {
+class CompanionObjects {
     companion object {
         val APP_PREFERENCES = "app_preferences"
         val SELECTED_THEME = "selected_theme"
@@ -10,6 +11,7 @@ class Singletons {
         val ID_SELECTED_PRICE = "selected_price"
         val ID_INPUT_BEGIN = "INPUT_BEGIN"
         val ID_INPUT_END = "INPUT_END"
+        val SKYLINK_SINGLETON = SkyLinkSingleton();
         val LIST_ESTACIONES = mutableListOf(
             Estacion(nombre = "Rio Seco", color = R.color.azul,0),
             Estacion(nombre = "UPEA", color = R.color.azul,1),

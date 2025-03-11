@@ -3,14 +3,13 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skylink.Singletons.Companion.APP_PREFERENCES
-import com.example.skylink.Singletons.Companion.ID_INPUT_BEGIN
-import com.example.skylink.Singletons.Companion.ID_INPUT_END
-import com.example.skylink.Singletons.Companion.ID_SELECTED_PRICE
-import com.example.skylink.Singletons.Companion.LIST_ESTACIONES
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
+import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.adapters.EstacionesAdapter
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
+import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class ResultActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivityResultBinding
@@ -23,18 +22,13 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
 
         //Nodos a usar en la optimización de la ruta
         nodoInicial = intent.getIntExtra(ID_INPUT_BEGIN, -1)
         nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
 
-        //Instanciación de SkyLink.java
-        val precioSeleccionado = sharedPreferences.getString(ID_SELECTED_PRICE, "Estándar")
-        val miSkyLink = SkyLink(precioSeleccionado)
-
         //Respuesta`desde SkyLink
-        val respuesta = miSkyLink.optimizarRuta(nodoInicial, nodoFinal);
+        val respuesta = SKYLINK_SINGLETON.getInstance().optimizarRuta(nodoInicial, nodoFinal);
         val tiempo = respuesta.intArr[0]
         val intArr = respuesta.intArr
         val precio = respuesta.doubleValue

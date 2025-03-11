@@ -2,8 +2,8 @@ package com.example.skylink
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.skylink.Singletons.Companion.APP_PREFERENCES
-import com.example.skylink.Singletons.Companion.SELECTED_THEME
+import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.singletons.CompanionObjects.Companion.SELECTED_THEME
 
 //Esta Activity sirve para aplicar correctamente los themes en el resto de Activities, sirve
 // extendiendo a la Activity en lugar de AppCompatActivity. Cualquier Activity que requiera aplicar

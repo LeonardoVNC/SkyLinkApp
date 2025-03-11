@@ -3,8 +3,8 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.skylink.Singletons.Companion.APP_PREFERENCES
-import com.example.skylink.Singletons.Companion.SELECTED_THEME
+import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.singletons.CompanionObjects.Companion.SELECTED_THEME
 import com.example.skylink.databinding.ActivitySelectThemeBinding
 
 class SelectThemeActivity : BaseActivity() {
