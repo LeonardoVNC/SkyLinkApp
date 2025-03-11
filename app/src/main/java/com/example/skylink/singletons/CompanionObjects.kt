@@ -12,6 +12,7 @@ class CompanionObjects {
         val ID_INPUT_BEGIN = "INPUT_BEGIN"
         val ID_INPUT_END = "INPUT_END"
         val SKYLINK_SINGLETON = SkyLinkSingleton()
+        val LAST_ROUTE_SINGLETON = UltimaRutaSingleton()
         val ID_LLAMADA_SKYLINK = "SKYLINK_CALL"
         val LIST_ESTACIONES = mutableListOf(
             Estacion(nombre = "Rio Seco", color = R.color.azul,0),

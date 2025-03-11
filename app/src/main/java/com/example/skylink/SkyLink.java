@@ -4,7 +4,7 @@ import com.example.skylink.customDataStructures.Dupla_IntArrDouble;
 
 import java.util.*;
 
-public class SkyLink {
+public class SkyLink implements Optimizador{
     //Parámetros para la inicialización de la clase
     private LinkedList<int[]>[] grafo;
     private Set<Integer>[] lineas;
@@ -244,6 +244,7 @@ public class SkyLink {
         }
     }
 
+    @Override
     public Dupla_IntArrDouble optimizarRuta(int nodoInicial, int nodoObjetivo) {
         if (nodoInicial == nodoObjetivo) {
             System.out.println("Ruta a la misma estación, no hay costo ni ruta.");

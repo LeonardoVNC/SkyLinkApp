@@ -9,6 +9,7 @@ import com.example.skylink.databinding.ActivityMainBinding
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
+import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -41,9 +42,13 @@ class MainActivity : BaseActivity() {
         }
 
         binding.mainButtonLastCall.setOnClickListener{
-            val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra(ID_LLAMADA_SKYLINK, "Recargar")
-            startActivity(intent)
+            if (LAST_ROUTE_SINGLETON.getInstance(this).isCached()) {
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra(ID_LLAMADA_SKYLINK, "Recargar")
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Sin registro de optimización en la sesión actual", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

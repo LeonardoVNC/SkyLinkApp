@@ -7,9 +7,11 @@ import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
 import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.adapters.EstacionesAdapter
+import com.example.skylink.customDataStructures.Dupla_IntArrDouble
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
+import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class ResultActivity : BaseActivity(), OnStationClickListener {
@@ -78,6 +80,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     }
 
     private fun cargaDeDatos(llamada: String) {
+        var respuesta: Dupla_IntArrDouble
         when (llamada) {
             "Optimizar" -> {
                 //Nodos a usar en la optimización de la ruta
@@ -85,19 +88,17 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
                 nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
 
                 //Respuesta`desde SkyLink
-                //TODO llamar al proxy aqui
-                println("Llamada a Optimización, todo debería ir bien")
-                val respuesta = SKYLINK_SINGLETON.getInstance(this).optimizarRuta(nodoInicial, nodoFinal)
-                tiempo = respuesta.intArr[0]
-                intArr = respuesta.intArr
-                precio = respuesta.doubleValue
+                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).optimizarRuta(nodoInicial, nodoFinal)
             }
             "Recargar" -> {
-                //TODO llamar al proxy aqui
-                println("Llamada a recargar, deberias crashear ahora mismo")
+                //Carga la respuesta desde el cache de Proxy
+                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).getLastOptmization()
             }
             else -> throw IllegalArgumentException("Valor de llamada $llamada no válido")
         }
+        tiempo = respuesta.intArr[0]
+        intArr = respuesta.intArr
+        precio = respuesta.doubleValue
     }
 
     override fun onItemClick(input: Int) {}
