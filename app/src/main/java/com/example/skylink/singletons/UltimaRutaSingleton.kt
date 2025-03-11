@@ -2,8 +2,9 @@ package com.example.skylink.singletons
 
 import android.content.Context
 import com.example.skylink.ProxyUltimaRuta
+import com.example.skylink.observerPattern.PriceObserver
 
-class UltimaRutaSingleton {
+class UltimaRutaSingleton : PriceObserver {
     private var instanciado = false
     private lateinit var instance: ProxyUltimaRuta
 
@@ -13,5 +14,11 @@ class UltimaRutaSingleton {
             instanciado = true
         }
         return instance
+    }
+
+    @Override
+    override fun update() {
+        //Se debe borrar el registro de la última ruta para no confundir precios
+        instanciado = false
     }
 }
