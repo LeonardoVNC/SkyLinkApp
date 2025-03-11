@@ -2,6 +2,8 @@ package com.example.skylink
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.skylink.Singletons.Companion.APP_PREFERENCES
+import com.example.skylink.Singletons.Companion.SELECTED_THEME
 
 //Esta Activity sirve para aplicar correctamente los themes en el resto de Activities, sirve
 // extendiendo a la Activity en lugar de AppCompatActivity. Cualquier Activity que requiera aplicar
@@ -9,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 // temas, se puede mantener AppCompatActivity
 
 open class BaseActivity : AppCompatActivity() {
-    companion object {
-        val APP_PREFERENCES = "app_preferences"
-        val SELECTED_THEME = "selected_theme"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
         val savedTheme = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_DarkTur)

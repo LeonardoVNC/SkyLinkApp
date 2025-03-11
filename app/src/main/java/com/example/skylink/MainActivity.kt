@@ -3,15 +3,12 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.example.skylink.SelectPricesActivity.Companion.ID_SELECTED_PRICE
+import com.example.skylink.Singletons.Companion.APP_PREFERENCES
+import com.example.skylink.Singletons.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    companion object {
-        val ID_USER_TYPE = "user_type"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

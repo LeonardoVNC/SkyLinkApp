@@ -2,14 +2,12 @@ package com.example.skylink
 
 import android.os.Bundle
 import android.widget.Toast
+import com.example.skylink.Singletons.Companion.APP_PREFERENCES
+import com.example.skylink.Singletons.Companion.ID_SELECTED_PRICE
 import com.example.skylink.databinding.ActivitySelectPricesBinding
 
 class SelectPricesActivity : BaseActivity() {
     private lateinit var binding: ActivitySelectPricesBinding
-
-    companion object {
-        val ID_SELECTED_PRICE = "selected_price"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,10 +3,11 @@ package com.example.skylink
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skylink.SelectPricesActivity.Companion.ID_SELECTED_PRICE
-import com.example.skylink.SelectTerminalActivity.Companion.ID_INPUT_BEGIN
-import com.example.skylink.SelectTerminalActivity.Companion.ID_INPUT_END
-import com.example.skylink.SelectTerminalActivity.Companion.LIST_ESTACIONES
+import com.example.skylink.Singletons.Companion.APP_PREFERENCES
+import com.example.skylink.Singletons.Companion.ID_INPUT_BEGIN
+import com.example.skylink.Singletons.Companion.ID_INPUT_END
+import com.example.skylink.Singletons.Companion.ID_SELECTED_PRICE
+import com.example.skylink.Singletons.Companion.LIST_ESTACIONES
 import com.example.skylink.adapters.EstacionesAdapter
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
