@@ -9,6 +9,7 @@ import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.adapters.EstacionesAdapter
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class ResultActivity : BaseActivity(), OnStationClickListener {
@@ -16,6 +17,9 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     private val recyclerTerminalAdapter by lazy { EstacionesAdapter(this) }
     private var nodoInicial = -1
     private var nodoFinal = -1
+    private var tiempo = -1
+    private lateinit var intArr: IntArray
+    private var precio = -1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,15 +27,8 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         val view = binding.root
         setContentView(view)
 
-        //Nodos a usar en la optimización de la ruta
-        nodoInicial = intent.getIntExtra(ID_INPUT_BEGIN, -1)
-        nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
-
-        //Respuesta`desde SkyLink
-        val respuesta = SKYLINK_SINGLETON.getInstance().optimizarRuta(nodoInicial, nodoFinal);
-        val tiempo = respuesta.intArr[0]
-        val intArr = respuesta.intArr
-        val precio = respuesta.doubleValue
+        val llamada = intent.getStringExtra(ID_LLAMADA_SKYLINK) ?: "Error"
+        cargaDeDatos(llamada)
 
         //Establecer el tiempo
         if (tiempo  == -1) {
@@ -77,6 +74,29 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         binding.resultRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = recyclerTerminalAdapter
+        }
+    }
+
+    private fun cargaDeDatos(llamada: String) {
+        when (llamada) {
+            "Optimizar" -> {
+                //Nodos a usar en la optimización de la ruta
+                nodoInicial = intent.getIntExtra(ID_INPUT_BEGIN, -1)
+                nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
+
+                //Respuesta`desde SkyLink
+                //TODO llamar al proxy aqui
+                println("Llamada a Optimización, todo debería ir bien")
+                val respuesta = SKYLINK_SINGLETON.getInstance(this).optimizarRuta(nodoInicial, nodoFinal)
+                tiempo = respuesta.intArr[0]
+                intArr = respuesta.intArr
+                precio = respuesta.doubleValue
+            }
+            "Recargar" -> {
+                //TODO llamar al proxy aqui
+                println("Llamada a recargar, deberias crashear ahora mismo")
+            }
+            else -> throw IllegalArgumentException("Valor de llamada $llamada no válido")
         }
     }
 

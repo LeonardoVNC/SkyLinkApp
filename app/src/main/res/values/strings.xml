@@ -35,6 +35,7 @@
 
     <!-- Main Activity -->
     <string name="main_desc_time">Optimizar Ruta</string>
+    <string name="main_desc_last_call">Última consulta</string>
     <string name="main_desc">Busque la mejor manera de llegar a su destino usando los teleféricos de la ciudad de La Paz.\n\nEsta app busca encontrar la ruta más óptima para llegar a su estación objetivo, estimando el tiempo que toma el trayecto y calculando el precio a pagar.\n\nPuede elegir los precios que se usarán dentro de la app en el menú de configuraciones ubicado en la parte superior.\n\nPresione el botón ubicado en la parte inferior para empezar a optimizar su ruta.</string>
 
     <!-- Selector de estaciones -->

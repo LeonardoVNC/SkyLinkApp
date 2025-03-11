@@ -61,5 +61,14 @@
             android:layout_marginHorizontal="30dp"
             android:padding="10dp"
             android:text="@string/main_desc_time"/>
+
+        <Button
+            android:id="@+id/main_button_last_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="30dp"
+            android:padding="10dp"
+            android:text="@string/main_desc_last_call"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -210,7 +210,7 @@ public class SkyLink {
         nombreEstaciones.put(25, "Obelisco");
     }
 
-    //Método que devuelve el valor asignado del map nombreEstaciones
+    //Método que devuelve el valor asignado del mapD nombreEstaciones
     public String estNomb(int key) {
         if (!nombreEstaciones.containsKey(key)) {
             System.out.println("Error en estNomb, verica la key y el estado del map nombreEstaciones.");

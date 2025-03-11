@@ -6,6 +6,9 @@ import android.widget.Toast
 import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityMainBinding
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,6 +38,12 @@ class MainActivity : BaseActivity() {
             } else {
                 clicks++
             }
+        }
+
+        binding.mainButtonLastCall.setOnClickListener{
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(ID_LLAMADA_SKYLINK, "Recargar")
+            startActivity(intent)
         }
     }
 }

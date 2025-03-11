@@ -9,6 +9,7 @@ import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.adapters.EstacionesAdapter
 import com.example.skylink.dataClasses.Estacion
 import com.example.skylink.databinding.ActivitySelectTerminalBinding
+import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 
 class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivitySelectTerminalBinding
@@ -42,6 +43,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra(ID_INPUT_BEGIN, inputBegin)
             intent.putExtra(ID_INPUT_END, inputEnd)
+            intent.putExtra(ID_LLAMADA_SKYLINK, "Optimizar")
             startActivity(intent)
         }
     }
