@@ -15,7 +15,7 @@ class CompanionObjects {
         val LAST_ROUTE_SINGLETON = UltimaRutaSingleton()
         val ID_LLAMADA_SKYLINK = "SKYLINK_CALL"
         val LIST_ESTACIONES = mutableListOf(
-            Estacion(nombre = "Rio Seco", color = R.color.azul,0),
+            Estacion(nombre = "Río Seco", color = R.color.azul,0),
             Estacion(nombre = "UPEA", color = R.color.azul,1),
             Estacion(nombre = "Plaza La Paz", color = R.color.azul, 2),
             Estacion(nombre = "Plaza Libertad", color = R.color.azul, 3),
@@ -23,7 +23,7 @@ class CompanionObjects {
             Estacion(nombre = "Cementerio", color = R.color.roja, 5),
             Estacion(nombre = "Central", color = R.color.roja, 6),
             Estacion(nombre = "Armentia", color = R.color.naranja, 7),
-            Estacion(nombre = "Periferica", color = R.color.naranja, 8),
+            Estacion(nombre = "Periférica", color = R.color.naranja, 8),
             Estacion(nombre = "Villarroel", color = R.color.blanca, 9),
             Estacion(nombre = "Busch", color = R.color.blanca, 10),
             Estacion(nombre = "Triangular", color = R.color.blanca, 11),

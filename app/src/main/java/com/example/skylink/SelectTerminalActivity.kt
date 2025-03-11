@@ -2,6 +2,7 @@ package com.example.skylink
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
 import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
@@ -38,9 +39,11 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         if (begin) {
             inputBegin = input
             setEndInput()
+            Toast.makeText(this, "Seleccionada la estación de origen", Toast.LENGTH_SHORT).show()
         } else {
             inputEnd = input
             val intent = Intent(this, ResultActivity::class.java)
+            Toast.makeText(this, "Seleccionada la estación objetivo", Toast.LENGTH_SHORT).show()
             intent.putExtra(ID_INPUT_BEGIN, inputBegin)
             intent.putExtra(ID_INPUT_END, inputEnd)
             intent.putExtra(ID_LLAMADA_SKYLINK, "Optimizar")

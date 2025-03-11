@@ -49,7 +49,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
             startActivity(intent)
         }else {
-            binding.resultPrice.text = "$precio ${getString(R.string.result_price)}"
+            binding.resultPrice.text = "${String.format("%.2f", precio)} ${getString(R.string.result_price)}"
         }
 
         //Mostrar la ruta recorrida
