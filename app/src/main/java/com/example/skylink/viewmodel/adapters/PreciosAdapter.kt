@@ -1,12 +1,12 @@
-package com.example.skylink.adapters
+package com.example.skylink.viewmodel.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.skylink.OnPriceClickListener
+import com.example.skylink.viewmodel.clickListeners.OnPriceClickListener
 import com.example.skylink.R
-import com.example.skylink.dataClasses.Precios
+import com.example.skylink.model.dataClasses.Precios
 import com.example.skylink.databinding.ItemSetPricesBinding
 
 class PreciosAdapter(private val listener: OnPriceClickListener): RecyclerView.Adapter<PreciosAdapter.PreciosViewHolder>() {

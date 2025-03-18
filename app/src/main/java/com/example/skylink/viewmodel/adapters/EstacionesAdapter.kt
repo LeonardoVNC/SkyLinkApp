@@ -1,12 +1,12 @@
-package com.example.skylink.adapters
+package com.example.skylink.viewmodel.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.skylink.OnStationClickListener
-import com.example.skylink.dataClasses.Estacion
+import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
+import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ItemTerminalBinding
 
 class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerView.Adapter<EstacionesAdapter.EstacionViewHolder>() {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="fill_vertical"
-    tools:context=".SelectPricesActivity">
+    tools:context=".viewmodel.activities.SelectPricesActivity">
     <!-- Menú superior -->
     <LinearLayout
         android:id="@+id/select_price_upper_menu"

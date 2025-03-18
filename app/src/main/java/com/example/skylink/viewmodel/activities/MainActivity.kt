@@ -1,15 +1,13 @@
-package com.example.skylink
+package com.example.skylink.viewmodel.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_USER_TYPE
+import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityMainBinding
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
-import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
+import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding

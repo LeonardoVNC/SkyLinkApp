@@ -1,4 +1,4 @@
-package com.example.skylink.observerPattern
+package com.example.skylink.viewmodel.observerPattern
 
 interface PriceSubject {
     fun registerObserver(observer: PriceObserver)

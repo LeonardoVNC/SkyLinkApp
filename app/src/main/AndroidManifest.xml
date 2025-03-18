@@ -13,25 +13,25 @@
         android:theme="@style/Theme.DarkTur"
         tools:targetApi="31">
         <activity
-            android:name=".DevActivity"
+            android:name=".viewmodel.activities.DevActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectPricesActivity"
+            android:name=".viewmodel.activities.SelectPricesActivity"
             android:exported="false" />
         <activity
-            android:name=".ConfiguracionesActivity"
+            android:name=".viewmodel.activities.ConfiguracionesActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultActivity"
+            android:name=".viewmodel.activities.ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectTerminalActivity"
+            android:name=".viewmodel.activities.SelectTerminalActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectThemeActivity"
+            android:name=".viewmodel.activities.SelectThemeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".viewmodel.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

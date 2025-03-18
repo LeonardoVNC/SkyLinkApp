@@ -1,22 +1,19 @@
-package com.example.skylink
+package com.example.skylink.viewmodel.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skylink.adapters.PreciosAdapter
-import com.example.skylink.dataClasses.Precios
-import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_SELECTED_PRICE
+import com.example.skylink.viewmodel.clickListeners.OnPriceClickListener
+import com.example.skylink.viewmodel.adapters.PreciosAdapter
+import com.example.skylink.model.dataClasses.Precios
+import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_SELECTED_PRICE
 import com.example.skylink.databinding.ActivitySelectPricesBinding
-import com.example.skylink.observerPattern.PriceObserver
-import com.example.skylink.observerPattern.PriceSubject
-import com.example.skylink.singletons.CompanionObjects.Companion.ASSET_READER
-import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
-import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
-import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import com.example.skylink.viewmodel.observerPattern.PriceObserver
+import com.example.skylink.viewmodel.observerPattern.PriceSubject
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_READER
+import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
+import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener {
     private lateinit var binding: ActivitySelectPricesBinding

@@ -1,8 +1,8 @@
-package com.example.skylink.singletons
+package com.example.skylink.model.singletons
 
-import com.example.skylink.LectorAssets
+import com.example.skylink.model.dataReader.LectorAssets
 import com.example.skylink.R
-import com.example.skylink.dataClasses.Estacion
+import com.example.skylink.model.dataClasses.Estacion
 
 class CompanionObjects {
     companion object {

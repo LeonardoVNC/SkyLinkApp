@@ -1,4 +1,4 @@
-package com.example.skylink.customDataStructures;
+package com.example.skylink.model.customDataStructures;
 
 public class Dupla_IntArrDouble {
     private int[] intArr;

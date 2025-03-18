@@ -1,9 +1,10 @@
-package com.example.skylink
+package com.example.skylink.viewmodel.activities
 
 import android.os.Bundle
 import android.view.View
+import com.example.skylink.R
 import com.example.skylink.databinding.ActivityDevBinding
-import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
+import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class DevActivity : BaseActivity() {
     private lateinit var binding: ActivityDevBinding

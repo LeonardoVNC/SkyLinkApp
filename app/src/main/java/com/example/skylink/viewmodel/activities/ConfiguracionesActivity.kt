@@ -1,10 +1,10 @@
-package com.example.skylink
+package com.example.skylink.viewmodel.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.skylink.singletons.CompanionObjects.Companion.APP_PREFERENCES
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_USER_TYPE
+import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_USER_TYPE
 import com.example.skylink.databinding.ActivityConfiguracionesBinding
 
 class ConfiguracionesActivity : BaseActivity() {

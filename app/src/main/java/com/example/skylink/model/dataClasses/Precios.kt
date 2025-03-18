@@ -1,4 +1,4 @@
-package com.example.skylink.dataClasses
+package com.example.skylink.model.dataClasses
 
 data class Precios(
     val titulo: String,

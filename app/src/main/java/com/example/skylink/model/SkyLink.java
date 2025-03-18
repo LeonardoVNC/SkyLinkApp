@@ -1,12 +1,13 @@
-package com.example.skylink;
+package com.example.skylink.model;
 
 import android.content.Context;
 
-import com.example.skylink.customDataStructures.Dupla_IntArrDouble;
+import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble;
+import com.example.skylink.model.dataReader.LectorAssets;
 
 import java.util.*;
 
-public class SkyLink implements Optimizador{
+public class SkyLink implements Optimizador {
     //Parámetros para la inicialización de la clase
     private LinkedList<int[]>[] grafo;
     private Set<Integer>[] lineas;

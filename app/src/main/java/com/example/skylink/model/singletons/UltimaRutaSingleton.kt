@@ -1,8 +1,8 @@
-package com.example.skylink.singletons
+package com.example.skylink.model.singletons
 
 import android.content.Context
-import com.example.skylink.ProxyUltimaRuta
-import com.example.skylink.observerPattern.PriceObserver
+import com.example.skylink.model.ProxyUltimaRuta
+import com.example.skylink.viewmodel.observerPattern.PriceObserver
 
 class UltimaRutaSingleton : PriceObserver {
     private var instanciado = false

@@ -1,18 +1,19 @@
-package com.example.skylink
+package com.example.skylink.viewmodel.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_INPUT_END
-import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
-import com.example.skylink.adapters.EstacionesAdapter
-import com.example.skylink.customDataStructures.Dupla_IntArrDouble
-import com.example.skylink.dataClasses.Estacion
+import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
+import com.example.skylink.R
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_END
+import com.example.skylink.model.singletons.CompanionObjects.Companion.LIST_ESTACIONES
+import com.example.skylink.viewmodel.adapters.EstacionesAdapter
+import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble
+import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
-import com.example.skylink.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
-import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
-import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
+import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 
 class ResultActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivityResultBinding

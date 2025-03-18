@@ -1,10 +1,11 @@
-package com.example.skylink
+package com.example.skylink.model
 
 import android.content.Context
-import com.example.skylink.customDataStructures.Dupla_IntArrDouble
-import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
+import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble
+import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
-class ProxyUltimaRuta(private val context: Context): Optimizador {
+class ProxyUltimaRuta(private val context: Context):
+    Optimizador {
     private var lastBegin = -1
     private var lastEnd = -1
     private lateinit var lastOptimization: Dupla_IntArrDouble
@@ -26,5 +27,5 @@ class ProxyUltimaRuta(private val context: Context): Optimizador {
 
     fun isCached(): Boolean { return cached }
 
-    fun getLastOptmization(): Dupla_IntArrDouble{ return lastOptimization }
+    fun getLastOptmization(): Dupla_IntArrDouble { return lastOptimization }
 }

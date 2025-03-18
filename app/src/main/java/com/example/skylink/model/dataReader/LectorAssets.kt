@@ -1,7 +1,7 @@
-package com.example.skylink
+package com.example.skylink.model.dataReader
 
 import android.content.Context
-import com.example.skylink.dataClasses.Precios
+import com.example.skylink.model.dataClasses.Precios
 import java.io.BufferedReader
 import java.io.InputStreamReader
 

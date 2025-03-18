@@ -5,7 +5,7 @@
     android:id="@+id/select_terminal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectTerminalActivity">
+    tools:context=".viewmodel.activities.SelectTerminalActivity">
 
     <!-- Menú superior -->
     <androidx.constraintlayout.widget.ConstraintLayout

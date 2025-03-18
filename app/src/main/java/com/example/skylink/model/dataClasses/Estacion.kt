@@ -1,4 +1,4 @@
-package com.example.skylink.dataClasses
+package com.example.skylink.model.dataClasses
 
 data class Estacion(
     val nombre: String,
