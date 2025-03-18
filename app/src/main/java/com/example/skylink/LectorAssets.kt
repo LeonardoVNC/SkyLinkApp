@@ -38,4 +38,35 @@ class LectorAssets {
         }
         return arrayOf("Error")
     }
+
+    fun loadGraph(context: Context): MutableList<List<Int>> {
+        val grafo = mutableListOf<List<Int>>()
+        val inputStream = context.assets.open("grafoTeleferico.txt")
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        reader.use {br ->
+            val primeraLinea = br.readLine()
+            grafo.add( primeraLinea.split(" ").map {it.toInt()} )
+
+            var siguienteLinea = br.readLine()
+            while (siguienteLinea.isNotEmpty()) {
+                val parts = siguienteLinea.split(" ")
+                if (parts.size != 2) {
+                    break;
+                }
+                val colorLinea = parts.map { it.toInt() }
+                grafo.add(colorLinea)
+                siguienteLinea = br.readLine()
+            }
+            while (siguienteLinea != null && siguienteLinea.isNotEmpty()) {
+                val parts = siguienteLinea.split(" ")
+                if (parts.size != 3) {
+                    break;
+                }
+                val arista = parts.map { it.toInt() }
+                grafo.add(arista)
+                siguienteLinea = br.readLine()
+            }
+        }
+        return grafo
+    }
 }

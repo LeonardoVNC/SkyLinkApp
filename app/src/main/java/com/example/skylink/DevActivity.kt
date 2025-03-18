@@ -15,7 +15,7 @@ class DevActivity : BaseActivity() {
         setContentView(view)
 
         val skyLink = SKYLINK_SINGLETON.getInstance(this)
-        skyLink.inicializarGrafo()
+        skyLink.inicializarGrafo(this)
 
         binding.devButtonBack.setOnClickListener{ onBackPressed() }
         binding.devButtonAccept.setOnClickListener{

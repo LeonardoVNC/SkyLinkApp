@@ -11,8 +11,8 @@ public class SkyLink implements Optimizador{
     private LinkedList<int[]>[] grafo;
     private Set<Integer>[] lineas;
     private Map<Integer, String> nombreEstaciones;
-    private int nodos = 26;
-    private int numLineas = 10;
+    private int nodos;
+    private int numLineas;
     private double pAbordaje;
     private double pTransbordo;
 
@@ -22,163 +22,43 @@ public class SkyLink implements Optimizador{
     private int[] padreDijkstra;    //Arreglo que guardará al nodo del que viene el camino con menor peso
 
     public SkyLink (String tipoCliente, Context context) {
-        grafo = new LinkedList[nodos];
-        lineas = new HashSet[nodos];
-        inicializarGrafo();
+        inicializarGrafo(context);
         inicializarNombreEstaciones();
         setTipoCliente(tipoCliente, context);
     }
 
     //Método encargado de estructurar todo el grafo, es no dirigido y tiene ponderación
-    public void inicializarGrafo() {
+    public void inicializarGrafo(Context context) {
+        LectorAssets reader = new LectorAssets();
+        List<List<Integer>> estructuraGrafo = reader.loadGraph(context);
+        nodos = estructuraGrafo.get(0).get(0);
+        numLineas = estructuraGrafo.get(0).get(1);
+
+        grafo = new LinkedList[nodos];
+        lineas = new HashSet[nodos];
+
         //Instanciamos una estructura de datos en cada posición del arreglo
         for (int i = 0; i < nodos; i++) {
             lineas[i] = new HashSet<>();
             grafo[i] = new LinkedList<int[]>();
         }
 
-        //Se llenan los datos del grafo
-        //Si grafo[a].add(new int[]{b, c}); => a=nodo origen, b=nodo destino, c=tiempo o ponderación
-        grafo[0].add(new int[]{1, 7});
-
-        grafo[1].add(new int[]{0, 7});
-        grafo[1].add(new int[]{2, 5});
-
-        grafo[2].add(new int[]{1, 5});
-        grafo[2].add(new int[]{3, 4});
-
-        grafo[3].add(new int[]{2, 4});
-        grafo[3].add(new int[]{4, 4});
-
-        grafo[4].add(new int[]{3, 4});
-        grafo[4].add(new int[]{5, 5});
-        grafo[4].add(new int[]{24, 8});
-
-        grafo[5].add(new int[]{4, 5});
-        grafo[5].add(new int[]{6, 5});
-
-        grafo[6].add(new int[]{5, 5});
-        grafo[6].add(new int[]{7, 4});
-
-        grafo[7].add(new int[]{6, 4});
-        grafo[7].add(new int[]{8, 4});
-
-        grafo[8].add(new int[]{7, 4});
-        grafo[8].add(new int[]{9, 4});
-
-        grafo[9].add(new int[]{8, 4});
-        grafo[9].add(new int[]{10, 4});
-
-        grafo[10].add(new int[]{9, 4});
-        grafo[10].add(new int[]{11, 5});
-        grafo[10].add(new int[]{13, 4});
-
-        grafo[11].add(new int[]{10, 5});
-        grafo[11].add(new int[]{12, 3});
-
-        grafo[12].add(new int[]{11, 3});
-        grafo[12].add(new int[]{16, 3});
-        grafo[12].add(new int[]{15, 3});
-
-        grafo[13].add(new int[]{10, 4});
-
-        grafo[14].add(new int[]{15, 3});
-
-        grafo[15].add(new int[]{12, 3});
-        grafo[15].add(new int[]{14, 4});
-
-        grafo[16].add(new int[]{12, 3});
-        grafo[16].add(new int[]{17, 3});
-        grafo[16].add(new int[]{20, 6});
-
-        grafo[17].add(new int[]{16, 3});
-        grafo[17].add(new int[]{18, 5});
-
-        grafo[18].add(new int[]{17, 5});
-        grafo[18].add(new int[]{19, 8});
-
-        grafo[19].add(new int[]{18, 8});
-
-        grafo[20].add(new int[]{16, 6});
-        grafo[20].add(new int[]{21, 6});
-
-        grafo[21].add(new int[]{20, 6});
-        grafo[21].add(new int[]{22, 4});
-
-        grafo[22].add(new int[]{21, 4});
-        grafo[22].add(new int[]{24, 4});
-
-        grafo[23].add(new int[]{24, 8});
-
-        grafo[24].add(new int[]{4,8});
-        grafo[24].add(new int[]{22,4});
-        grafo[24].add(new int[]{25,8});
-        grafo[24].add(new int[]{23,8});
-
-        grafo[25].add(new int[]{24,8});
-
-        //Se seleccionan las líneas a las que pertencen los distintos nodos o estaciones
-        lineas[0].add(0);
-
-        lineas[1].add(0);
-
-        lineas[2].add(0);
-
-        lineas[3].add(0);
-
-        lineas[4].add(0);
-        lineas[4].add(1);
-        lineas[4].add(8);
-
-        lineas[5].add(1);
-
-        lineas[6].add(1);
-        lineas[6].add(2);
-
-        lineas[7].add(2);
-
-        lineas[8].add(2);
-
-        lineas[9].add(2);
-        lineas[9].add(3);
-
-        lineas[10].add(3);
-        lineas[10].add(4);
-
-        lineas[11].add(3);
-
-        lineas[12].add(3);
-        lineas[12].add(5);
-
-        lineas[13].add(4);
-
-        lineas[14].add(5);
-
-        lineas[15].add(5);
-
-        lineas[16].add(5);
-        lineas[16].add(6);
-        lineas[16].add(7);
-
-        lineas[17].add(6);
-
-        lineas[18].add(6);
-
-        lineas[19].add(6);
-
-        lineas[20].add(7);
-
-        lineas[21].add(7);
-
-        lineas[22].add(7);
-        lineas[22].add(8);
-
-        lineas[23].add(9);
-
-        lineas[24].add(8);
-        lineas[24].add(9);
-
-        lineas[25].add(9);
+        int i = 1;
+        while (estructuraGrafo.get(i).size() == 2) {
+            int estacion = estructuraGrafo.get(i).get(0);
+            int linea = estructuraGrafo.get(i).get(1);
+            lineas[estacion].add(linea);
+            i++;
+        }
+        while (i < estructuraGrafo.size() && estructuraGrafo.get(i).size() == 3) {
+            int estacionA = estructuraGrafo.get(i).get(0);
+            int estacionB = estructuraGrafo.get(i).get(1);
+            int tiempo = estructuraGrafo.get(i).get(2);
+            grafo[estacionA].add(new int[]{estacionB, tiempo});
+            grafo[estacionB].add(new int[]{estacionA, tiempo});
+            System.out.println(i);
+            i++;
+        }
     }
 
     //Método encargado de asignar un nombre a cada uno de los nodos o estaciones
@@ -233,7 +113,7 @@ public class SkyLink implements Optimizador{
     public Dupla_IntArrDouble optimizarRuta(int nodoInicial, int nodoObjetivo) {
         if (nodoInicial == nodoObjetivo) {
             System.out.println("Ruta a la misma estación, no hay costo ni ruta.");
-            return new Dupla_IntArrDouble(new int[]{nodoInicial}, 0);
+            return new Dupla_IntArrDouble(new int[]{0,nodoInicial}, 0);
         }
         dist = new int[grafo.length];
         padreDijkstra = new int[grafo.length];
