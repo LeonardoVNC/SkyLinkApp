@@ -3,6 +3,7 @@ package com.example.skylink
 import android.os.Bundle
 import android.view.View
 import com.example.skylink.databinding.ActivityDevBinding
+import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 class DevActivity : BaseActivity() {
     private lateinit var binding: ActivityDevBinding
@@ -13,7 +14,7 @@ class DevActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        val skyLink = SkyLink("Estándar")
+        val skyLink = SKYLINK_SINGLETON.getInstance(this)
         skyLink.inicializarGrafo()
 
         binding.devButtonBack.setOnClickListener{ onBackPressed() }

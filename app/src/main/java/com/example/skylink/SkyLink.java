@@ -1,5 +1,7 @@
 package com.example.skylink;
 
+import android.content.Context;
+
 import com.example.skylink.customDataStructures.Dupla_IntArrDouble;
 
 import java.util.*;
@@ -19,12 +21,12 @@ public class SkyLink implements Optimizador{
     private int[] dist;             //Arreglo que guardará la distancia entre el nodo de inicio y el resto de nodos
     private int[] padreDijkstra;    //Arreglo que guardará al nodo del que viene el camino con menor peso
 
-    public SkyLink (String tipoCliente) {
+    public SkyLink (String tipoCliente, Context context) {
         grafo = new LinkedList[nodos];
         lineas = new HashSet[nodos];
         inicializarGrafo();
         inicializarNombreEstaciones();
-        setTipoCliente(tipoCliente);
+        setTipoCliente(tipoCliente, context);
     }
 
     //Método encargado de estructurar todo el grafo, es no dirigido y tiene ponderación
@@ -220,28 +222,11 @@ public class SkyLink implements Optimizador{
     }
 
     //Método encargado de definir el precio de abordo y transbordo según el tipo de cliente
-    public void setTipoCliente(String tipoCliente) {
-        switch (tipoCliente) {
-            case "Estándar": {
-                pAbordaje = 3.0;
-                pTransbordo = 2.0;
-                break;
-            }
-            case "Estudiante": {
-                pAbordaje = 1.5;
-                pTransbordo = 1.0;
-                break;
-            }
-            case "Adulto mayor": {
-                pAbordaje = 1.5;
-                pTransbordo = 1;
-                break;
-            }
-            default: {
-                System.out.println("Parámetro inválido en setTipoCliente");
-                break;
-            }
-        }
+    public void setTipoCliente(String tipoCliente, Context context) {
+        LectorAssets reader = new LectorAssets();
+        String[] lineaPrecio = reader.searchTitlePrices(context, tipoCliente);
+        pAbordaje = Double.parseDouble(lineaPrecio[2]);
+        pTransbordo = Double.parseDouble(lineaPrecio[3]);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.skylink.singletons
 
+import com.example.skylink.LectorAssets
 import com.example.skylink.R
 import com.example.skylink.dataClasses.Estacion
 
@@ -14,6 +15,7 @@ class CompanionObjects {
         val SKYLINK_SINGLETON = SkyLinkSingleton()
         val LAST_ROUTE_SINGLETON = UltimaRutaSingleton()
         val ID_LLAMADA_SKYLINK = "SKYLINK_CALL"
+        val ASSET_READER = LectorAssets()
         val LIST_ESTACIONES = mutableListOf(
             Estacion(nombre = "Río Seco", color = R.color.azul,0),
             Estacion(nombre = "UPEA", color = R.color.azul,1),

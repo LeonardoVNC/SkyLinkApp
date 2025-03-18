@@ -14,7 +14,7 @@ class SkyLinkSingleton : PriceObserver {
         if (!instanciado) {
             val sharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
             val precioSeleccionado = sharedPreferences.getString(ID_SELECTED_PRICE, "Estándar")
-            instance = SkyLink(precioSeleccionado)
+            instance = SkyLink(precioSeleccionado, context)
             instanciado=true
         }
         return instance

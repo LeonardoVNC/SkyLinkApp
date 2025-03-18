@@ -11,6 +11,7 @@ import com.example.skylink.singletons.CompanionObjects.Companion.ID_SELECTED_PRI
 import com.example.skylink.databinding.ActivitySelectPricesBinding
 import com.example.skylink.observerPattern.PriceObserver
 import com.example.skylink.observerPattern.PriceSubject
+import com.example.skylink.singletons.CompanionObjects.Companion.ASSET_READER
 import com.example.skylink.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 import com.example.skylink.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
@@ -38,32 +39,12 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
     //Función que carga todos los items del RecyclerView
     private fun setUpRecyclerView() {
         val listaDeDatos = mutableListOf<Precios>()
-        listaDeDatos.addAll(loadItemsFromAssets(this))
+        listaDeDatos.addAll(ASSET_READER.loadPrices(this))
         recyclerPriceAdapter.addDataToList(listaDeDatos)
         binding.selectPriceRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = recyclerPriceAdapter
         }
-    }
-
-    fun loadItemsFromAssets(context: Context): List<Precios> {
-        val listaPrecios = mutableListOf<Precios>()
-        val inputStream = context.assets.open("precios.txt")
-        val reader = BufferedReader(InputStreamReader(inputStream))
-        reader.use { br ->
-            br.forEachLine { line ->
-                val parts = line.split(",")
-                if (parts.size == 4) {
-                    val titulo = parts[0]
-                    val descripcion = parts[1]
-                    val montoA = parts[2].toDoubleOrNull() ?: 0.0
-                    val montoB = parts[3].toDoubleOrNull() ?: 0.0
-                    listaPrecios.add(Precios(titulo, descripcion, montoA, montoB))
-                }
-            }
-        }
-
-        return listaPrecios
     }
 
     @Override
