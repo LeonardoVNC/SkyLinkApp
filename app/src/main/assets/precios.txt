@@ -1,0 +1,3 @@
+Estándar,Precio empleado para la mayoría de tarjetas y boletos.,3.0,2.0
+Estudiante,Precio especial para estudiantes con tarjeta estudiantil.,1.5,1.0
+Adulto Mayor,Precio especial para adultos mayores.,1.5,1.0

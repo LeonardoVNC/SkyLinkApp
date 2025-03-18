@@ -9,12 +9,8 @@
     <!-- Cambiar Precios -->
     <string name="select_price_button">Seleccionar</string>
     <string name="select_price_desc">Seleccione la categoria a la que corresponde:</string>
-    <string name="select_price_common">Estándar</string>
-    <string name="select_price_common_desc">Precio empleado para la mayoría de tarjetas y boletos.\nPrecio de abordaje: 3 Bs\nPrecio de transbordo: 2 Bs</string>
-    <string name="select_price_student">Estudiante</string>
-    <string name="select_price_student_desc">Precio especial para estudiantes con tarjeta estudiantil.\nPrecio de abordaje: 1.50 Bs\nPrecio de transbordo: 1 Bs</string>
-    <string name="select_price_adult">Adulto mayor</string>
-    <string name="select_price_adult_desc">Precio especial para adultos mayores.\nPrecio de abordaje: 1.50 Bs\nPrecio de transbordo: 1 Bs</string>
+    <string name="item_price_board">Precio abordaje:</string>
+    <string name="item_price_transboard">Precio transbordo:</string>
 
     <!-- Selector de temas -->
     <string name="desc_themes">Seleccione un tema:</string>
