@@ -23,22 +23,22 @@ class SelectThemeActivity : BaseActivity() {
         tema = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_DarkTur)
 
         //Para cualquier tema que se agregue a la aplicación, se debe añadir su configuracion aqui.
-        binding.selectThemeButtonDarkTur.setOnClickListener {
+        binding.selectThemeDarkTur.setOnClickListener {
             tema = R.style.Theme_DarkTur
             binding.selectThemeDescSave.text = getString(R.string.theme_dark_tur)
             binding.selectThemeDescSave.visibility = View.VISIBLE
         }
-        binding.selectThemeButtonDarkPurple.setOnClickListener {
+        binding.selectThemeDarkPurple.setOnClickListener {
             tema = R.style.Theme_DarkPurple
             binding.selectThemeDescSave.text = getString(R.string.theme_dark_purple)
             binding.selectThemeDescSave.visibility = View.VISIBLE
         }
-        binding.selectThemeButtonDark.setOnClickListener {
+        binding.selectThemeDark.setOnClickListener {
             tema = R.style.Theme_Dark
             binding.selectThemeDescSave.text = getString(R.string.theme_dark)
             binding.selectThemeDescSave.visibility = View.VISIBLE
         }
-        binding.selectThemeButtonLight.setOnClickListener {
+        binding.selectThemeLight.setOnClickListener {
             tema = R.style.Theme_Light
             binding.selectThemeDescSave.text = getString(R.string.theme_light)
             binding.selectThemeDescSave.visibility = View.VISIBLE
