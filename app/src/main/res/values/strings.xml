@@ -30,9 +30,13 @@
     <string name="dev_graph">Grafo de estaciones detallado en el LogCat</string>
 
     <!-- Main Activity -->
-    <string name="main_desc_time">Optimizar Ruta</string>
-    <string name="main_desc_last_call">Última consulta</string>
-    <string name="main_desc">Busque la mejor manera de llegar a su destino usando los teleféricos de la ciudad de La Paz.\n\nEsta app busca encontrar la ruta más óptima para llegar a su estación objetivo, estimando el tiempo que toma el trayecto y calculando el precio a pagar.\n\nPuede elegir los precios que se usarán dentro de la app en el menú de configuraciones ubicado en la parte superior.\n\nPresione el botón ubicado en la parte inferior para empezar a optimizar su ruta.</string>
+    <string name="main_welcome">¡Bienvenido!</string>
+    <string name="main_welcome_desc">¿Cómo podemos ayudarlo el día de hoy?</string>
+    <string name="main_desc_route">Optimizar ruta</string>
+    <string name="main_desc_prices">Establecer precios</string>
+    <string name="main_desc_last">Último recorrido</string>
+    <string name="main_desc_config">Configuraciones</string>
+
 
     <!-- Selector de estaciones -->
     <string name="item_terminal_def">Nombre de la estación</string>

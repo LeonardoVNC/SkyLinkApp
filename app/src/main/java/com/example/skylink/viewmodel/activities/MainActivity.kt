@@ -20,12 +20,12 @@ class MainActivity : BaseActivity() {
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
         var clicks = 0
 
-        binding.mainButtonMenu.setOnClickListener{
+        binding.mainOptionConfig.setOnClickListener{
             val intent = Intent(this, ConfiguracionesActivity::class.java)
             startActivity(intent)
         }
 
-        binding.mainButtonTime.setOnClickListener{
+        binding.mainOptionRoute.setOnClickListener{
             val intent = Intent(this, SelectTerminalActivity::class.java)
             startActivity(intent)
         }
@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        binding.mainButtonLastCall.setOnClickListener{
+        binding.mainOptionLast.setOnClickListener{
             if (LAST_ROUTE_SINGLETON.getInstance(this).isCached()) {
                 val intent = Intent(this, ResultActivity::class.java)
                 intent.putExtra(ID_LLAMADA_SKYLINK, "Recargar")
@@ -47,6 +47,11 @@ class MainActivity : BaseActivity() {
             } else {
                 Toast.makeText(this, "Sin registro de optimización en la sesión actual", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.mainOptionPrice.setOnClickListener{
+            val intent = Intent(this, SelectPricesActivity::class.java)
+            startActivity(intent)
         }
     }
 }
