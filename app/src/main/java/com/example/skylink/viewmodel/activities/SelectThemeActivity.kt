@@ -11,7 +11,7 @@ import com.example.skylink.databinding.ActivitySelectThemeBinding
 class SelectThemeActivity : BaseActivity() {
     private lateinit var binding: ActivitySelectThemeBinding
 
-    private var tema: Int = R.style.Theme_DarkTur
+    private var tema: Int = R.style.Theme_Default
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +20,14 @@ class SelectThemeActivity : BaseActivity() {
         setContentView(view)
 
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        tema = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_DarkTur)
+        tema = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)
 
         //Para cualquier tema que se agregue a la aplicación, se debe añadir su configuracion aqui.
+        binding.selectThemeDefault.setOnClickListener {
+            tema = R.style.Theme_Default
+            binding.selectThemeDescSave.text = getString(R.string.theme_default)
+            binding.selectThemeDescSave.visibility = View.VISIBLE
+        }
         binding.selectThemeDarkTur.setOnClickListener {
             tema = R.style.Theme_DarkTur
             binding.selectThemeDescSave.text = getString(R.string.theme_dark_tur)

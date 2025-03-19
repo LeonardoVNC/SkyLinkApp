@@ -47,6 +47,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Default -->
+            <LinearLayout
+                android:id="@+id/select_theme_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="?attr/colorSurface"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:theme="@style/Theme.Default">
+                <ImageView
+                    android:id="@+id/select_theme_button_default"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/checked_box" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:text="@string/theme_default"
+                    android:textStyle="italic|bold" />
+            </LinearLayout>
+
             <!-- Dark Tur -->
             <LinearLayout
                 android:id="@+id/select_theme_dark_tur"
@@ -57,8 +83,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:theme="@style/Theme.DarkTur">
-                <ImageButton
+                <ImageView
                     android:id="@+id/select_theme_button_dark_tur"
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
@@ -82,8 +109,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:theme="@style/Theme.DarkPurple">
-                <ImageButton
+                <ImageView
                     android:id="@+id/select_theme_button_dark_purple"
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
@@ -107,8 +135,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:theme="@style/Theme.Dark">
-                <ImageButton
+                <ImageView
                     android:id="@+id/select_theme_button_dark"
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
@@ -132,8 +161,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:theme="@style/Theme.Light">
-                <ImageButton
+                <ImageView
                     android:id="@+id/select_theme_button_light"
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"

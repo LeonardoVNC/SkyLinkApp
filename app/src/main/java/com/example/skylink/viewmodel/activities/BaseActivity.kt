@@ -14,7 +14,7 @@ import com.example.skylink.model.singletons.CompanionObjects.Companion.SELECTED_
 open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        val savedTheme = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_DarkTur)
+        val savedTheme = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)
         setTheme(savedTheme)
         super.onCreate(savedInstanceState)
     }
