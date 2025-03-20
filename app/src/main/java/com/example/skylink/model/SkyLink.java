@@ -2,7 +2,7 @@ package com.example.skylink.model;
 
 import android.content.Context;
 
-import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble;
+import com.example.skylink.model.customDataStructures.RespuestaOptimizador;
 import com.example.skylink.model.dataReader.LectorAssets;
 
 import java.util.*;
@@ -111,10 +111,10 @@ public class SkyLink implements Optimizador {
     }
 
     @Override
-    public Dupla_IntArrDouble optimizarRuta(int nodoInicial, int nodoObjetivo) {
+    public RespuestaOptimizador optimizarRuta(int nodoInicial, int nodoObjetivo) {
         if (nodoInicial == nodoObjetivo) {
             System.out.println("Ruta a la misma estación, no hay costo ni ruta.");
-            return new Dupla_IntArrDouble(new int[]{0,nodoInicial}, 0);
+            return new RespuestaOptimizador(0, new int[]{}, 0.0);
         }
         dist = new int[grafo.length];
         padreDijkstra = new int[grafo.length];
@@ -144,18 +144,17 @@ public class SkyLink implements Optimizador {
         //Si nunca visitamos al nodo objetivo, INF no habra sido sobreescrito
         if (dist[nodoObjetivo] == INF) {
             System.out.println("No se puede llegar desde " + estNomb(nodoInicial) + " hasta " + estNomb(nodoObjetivo));
-            return new Dupla_IntArrDouble(new int[]{-1}, -1.0);
+            return new RespuestaOptimizador(-1, new int[]{-1}, -1.0);
         } else {
             int[] nodosRecorrido = new int[grafo.length];
             Arrays.fill(nodosRecorrido,-1);
             Set<Integer> lineasRecorridas = new HashSet<>();
             double costoRecorrido = 0.0;
 
-            nodosRecorrido[0] = dist[nodoObjetivo];
-            nodosRecorrido[1] = nodoObjetivo;
+            nodosRecorrido[0] = nodoObjetivo;
 
             int i = nodoObjetivo;
-            int j = 2;
+            int j = 1;
             //Se recorre el camino desde el nodo objetivo hasta el nodo inicial (de padre -1)
             while (padreDijkstra[i] != -1) {
                 lineasRecorridas.add(mismaLinea(i,padreDijkstra[i]));
@@ -164,7 +163,7 @@ public class SkyLink implements Optimizador {
                 i = padreDijkstra[i];
             }
             costoRecorrido = (lineasRecorridas.size()-1)*pTransbordo+pAbordaje;
-            return new Dupla_IntArrDouble(nodosRecorrido, costoRecorrido);
+            return new RespuestaOptimizador(dist[nodoObjetivo],nodosRecorrido, costoRecorrido);
         }
     }
 

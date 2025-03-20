@@ -1,7 +1,7 @@
 package com.example.skylink.model;
 
-import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble;
+import com.example.skylink.model.customDataStructures.RespuestaOptimizador;
 
 public interface Optimizador {
-    Dupla_IntArrDouble optimizarRuta(int nodoInicial, int nodoObjetivo);
+    RespuestaOptimizador optimizarRuta(int nodoInicial, int nodoObjetivo);
 }

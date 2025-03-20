@@ -9,7 +9,7 @@ import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_END
 import com.example.skylink.model.singletons.CompanionObjects.Companion.LIST_ESTACIONES
 import com.example.skylink.viewmodel.adapters.EstacionesAdapter
-import com.example.skylink.model.customDataStructures.Dupla_IntArrDouble
+import com.example.skylink.model.customDataStructures.RespuestaOptimizador
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
@@ -21,7 +21,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     private var nodoInicial = -1
     private var nodoFinal = -1
     private var tiempo = -1
-    private lateinit var intArr: IntArray
+    private lateinit var recorrido: IntArray
     private var precio = -1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +55,11 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
 
         //Mostrar la ruta recorrida
         val recorrido = mutableListOf<Estacion>()
-        for (estacion in 1 until intArr.size) {
-            if(intArr[estacion] == -1) {
+        for (estacion in 0 until this.recorrido.size) {
+            if(this.recorrido[estacion] == -1) {
                 break
             }
-            recorrido.add(LIST_ESTACIONES.get(intArr[estacion]))
+            recorrido.add(LIST_ESTACIONES.get(this.recorrido[estacion]))
         }
         setUpRecyclerView(recorrido)
 
@@ -81,7 +81,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     }
 
     private fun cargaDeDatos(llamada: String) {
-        var respuesta: Dupla_IntArrDouble
+        var respuesta: RespuestaOptimizador
         when (llamada) {
             "Optimizar" -> {
                 //Nodos a usar en la optimización de la ruta
@@ -97,9 +97,9 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
             }
             else -> throw IllegalArgumentException("Valor de llamada $llamada no válido")
         }
-        tiempo = respuesta.intArr[0]
-        intArr = respuesta.intArr
-        precio = respuesta.doubleValue
+        tiempo = respuesta.tiempo
+        recorrido = respuesta.recorrido
+        precio = respuesta.precio
     }
 
     override fun onItemClick(input: Int) {}
