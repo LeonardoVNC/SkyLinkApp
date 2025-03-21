@@ -9,6 +9,7 @@ import com.example.skylink.R
 import com.example.skylink.model.dataClasses.Precios
 import com.example.skylink.databinding.ItemSetPricesBinding
 
+//Clase que sirve para adaptar el uso del recycler view que muestra los precios empleados en la app
 class PreciosAdapter(private val listener: OnPriceClickListener): RecyclerView.Adapter<PreciosAdapter.PreciosViewHolder>() {
     private val datos = mutableListOf<Precios>()
     private var context: Context?=null

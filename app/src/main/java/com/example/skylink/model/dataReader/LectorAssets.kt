@@ -5,7 +5,9 @@ import com.example.skylink.model.dataClasses.Precios
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
+//Clase uada para la lectura de datos guardados en los distintos assets
 class LectorAssets {
+    //Funcion que retorna la información de precios.txt
     fun loadPrices(context: Context): List<Precios> {
         val listaPrecios = mutableListOf<Precios>()
         val inputStream = context.assets.open("precios.txt")
@@ -25,6 +27,7 @@ class LectorAssets {
         return listaPrecios
     }
 
+    //Función que busca y retorna la información de una de las líneas de precios.txt
     fun searchTitlePrices(context: Context, titulo: String): Array<String> {
         val inputStream = context.assets.open("precios.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -39,14 +42,17 @@ class LectorAssets {
         return arrayOf("Error")
     }
 
+    //Función que retorna la información correspondiente a la estructura del grafo usado por el Optimizador
     fun loadGraph(context: Context): MutableList<List<Int>> {
-        val grafo = mutableListOf<List<Int>>()
+        val estructuraGrafo = mutableListOf<List<Int>>()
         val inputStream = context.assets.open("grafoTeleferico.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))
-        reader.use {br ->
+        reader.use { br ->
+            //Se lee la información básica del grafo, como el número de nodos y estaciones
             val primeraLinea = br.readLine()
-            grafo.add( primeraLinea.split(" ").map {it.toInt()} )
+            estructuraGrafo.add(primeraLinea.split(" ").map { it.toInt() })
 
+            //Bucle para leer la información de las estaciones y sus líneas correspondientes
             var siguienteLinea = br.readLine()
             while (siguienteLinea.isNotEmpty()) {
                 val parts = siguienteLinea.split(" ")
@@ -54,19 +60,20 @@ class LectorAssets {
                     break;
                 }
                 val colorLinea = parts.map { it.toInt() }
-                grafo.add(colorLinea)
+                estructuraGrafo.add(colorLinea)
                 siguienteLinea = br.readLine()
             }
+            //Bucle para leer la información de las aristas entre las estaciones y su peso (tiempo) correspondiente
             while (siguienteLinea != null && siguienteLinea.isNotEmpty()) {
                 val parts = siguienteLinea.split(" ")
                 if (parts.size != 3) {
                     break;
                 }
                 val arista = parts.map { it.toInt() }
-                grafo.add(arista)
+                estructuraGrafo.add(arista)
                 siguienteLinea = br.readLine()
             }
         }
-        return grafo
+        return estructuraGrafo
     }
 }

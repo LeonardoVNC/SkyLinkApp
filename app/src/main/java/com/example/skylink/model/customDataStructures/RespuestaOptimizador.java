@@ -1,5 +1,7 @@
 package com.example.skylink.model.customDataStructures;
 
+//Esta clase es usada para guardar toda la información proporcionada por la interfaz Optimizador en
+// una única estructura de datos, facilitando su uso y entendimiento.
 public class RespuestaOptimizador {
     private int tiempo;
     private int[] recorrido;

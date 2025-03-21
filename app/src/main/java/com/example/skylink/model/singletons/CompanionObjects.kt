@@ -4,6 +4,7 @@ import com.example.skylink.model.dataReader.LectorAssets
 import com.example.skylink.R
 import com.example.skylink.model.dataClasses.Estacion
 
+//Clase que acumula todos los Companion Objects de la aplicación para facilitar su acceso
 class CompanionObjects {
     companion object {
         val APP_PREFERENCES = "app_preferences"
@@ -17,8 +18,8 @@ class CompanionObjects {
         val ID_LLAMADA_SKYLINK = "SKYLINK_CALL"
         val ASSET_READER = LectorAssets()
         val LIST_ESTACIONES = mutableListOf(
-            Estacion(nombre = "Río Seco", color = R.color.azul,0),
-            Estacion(nombre = "UPEA", color = R.color.azul,1),
+            Estacion(nombre = "Río Seco", color = R.color.azul, 0),
+            Estacion(nombre = "UPEA", color = R.color.azul, 1),
             Estacion(nombre = "Plaza La Paz", color = R.color.azul, 2),
             Estacion(nombre = "Plaza Libertad", color = R.color.azul, 3),
             Estacion(nombre = "16 de Julio", color = R.color.roja, 4),

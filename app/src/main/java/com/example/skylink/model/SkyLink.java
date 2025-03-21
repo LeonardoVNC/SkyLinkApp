@@ -1,12 +1,11 @@
 package com.example.skylink.model;
 
 import android.content.Context;
-
 import com.example.skylink.model.customDataStructures.RespuestaOptimizador;
 import com.example.skylink.model.dataReader.LectorAssets;
-
 import java.util.*;
 
+//Clase encargada de la optimización de rutas, calcular el precio del recorrido y devolver el tiempo
 public class SkyLink implements Optimizador {
     //Parámetros para la inicialización de la clase
     private LinkedList<int[]>[] grafo;
@@ -22,13 +21,13 @@ public class SkyLink implements Optimizador {
     private int[] dist;             //Arreglo que guardará la distancia entre el nodo de inicio y el resto de nodos
     private int[] padreDijkstra;    //Arreglo que guardará al nodo del que viene el camino con menor peso
 
-    public SkyLink (String tipoCliente, Context context) {
+    public SkyLink(String tipoCliente, Context context) {
         inicializarGrafo(context);
         inicializarNombreEstaciones();
         setTipoCliente(tipoCliente, context);
     }
 
-    //Método encargado de estructurar todo el grafo, es no dirigido y tiene ponderación
+    //Método encargado de estructurar el grafo, es no dirigido y tiene ponderación
     public void inicializarGrafo(Context context) {
         LectorAssets reader = new LectorAssets();
         List<List<Integer>> estructuraGrafo = reader.loadGraph(context);
@@ -111,8 +110,8 @@ public class SkyLink implements Optimizador {
     }
 
     @Override
-    public RespuestaOptimizador optimizarRuta(int nodoInicial, int nodoObjetivo) {
-        if (nodoInicial == nodoObjetivo) {
+    public RespuestaOptimizador optimizarRuta(int estacionOrigen, int estacionObjetivo) {
+        if (estacionOrigen == estacionObjetivo) {
             System.out.println("Ruta a la misma estación, no hay costo ni ruta.");
             return new RespuestaOptimizador(0, new int[]{}, 0.0);
         }
@@ -121,9 +120,9 @@ public class SkyLink implements Optimizador {
         Arrays.fill(dist, INF);     //Se llena el arreglo de distancias con infinito para luego compararlo
         Comparator<int[]> comparator = (a, b) -> a[0] - b[0];           //Se instancia la cola de prioridad
         PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);      //Por defecto da prioridad al número más bajo
-        dist[nodoInicial] = 0;                          //La distancia desde el nodo inicial es 0
-        padreDijkstra[nodoInicial] = -1;                //El nodo inicial no tiene un nodo padre
-        pq.add(new int[] { 0, nodoInicial });           //Se añade a la cola un arreglo con la distancia en 0 y el nodo inicial
+        dist[estacionOrigen] = 0;                          //La distancia desde el nodo inicial es 0
+        padreDijkstra[estacionOrigen] = -1;                //El nodo inicial no tiene un nodo padre
+        pq.add(new int[]{0, estacionOrigen});           //Se añade a la cola un arreglo con la distancia en 0 y el nodo inicial
         while (!pq.isEmpty()) {                         //Se sigue el algoritmo de Dijkstra mientras la cola no este vacía
             int pesoActual = pq.peek()[0];              //Se guarda el peso y el nodo relacionado
             int nodoActual = pq.peek()[1];              //del frente de la cola de prioridad
@@ -137,33 +136,33 @@ public class SkyLink implements Optimizador {
                 if (siguientePeso < dist[siguienteNodo]) {              //Si el nuevo camino resulta ser menor, se efectua el Relax
                     dist[siguienteNodo] = siguientePeso;                //la distancia y el padre se sobreescriben
                     padreDijkstra[siguienteNodo] = nodoActual;
-                    pq.add(new int[] { siguientePeso, siguienteNodo }); //Se agregan los caminos posibles desde el nuevo camino
+                    pq.add(new int[]{siguientePeso, siguienteNodo}); //Se agregan los caminos posibles desde el nuevo camino
                 }
             }
         }
         //Si nunca visitamos al nodo objetivo, INF no habra sido sobreescrito
-        if (dist[nodoObjetivo] == INF) {
-            System.out.println("No se puede llegar desde " + estNomb(nodoInicial) + " hasta " + estNomb(nodoObjetivo));
+        if (dist[estacionObjetivo] == INF) {
+            System.out.println("No se puede llegar desde " + estNomb(estacionOrigen) + " hasta " + estNomb(estacionObjetivo));
             return new RespuestaOptimizador(-1, new int[]{-1}, -1.0);
         } else {
             int[] nodosRecorrido = new int[grafo.length];
-            Arrays.fill(nodosRecorrido,-1);
+            Arrays.fill(nodosRecorrido, -1);
             Set<Integer> lineasRecorridas = new HashSet<>();
             double costoRecorrido = 0.0;
 
-            nodosRecorrido[0] = nodoObjetivo;
+            nodosRecorrido[0] = estacionObjetivo;
 
-            int i = nodoObjetivo;
+            int i = estacionObjetivo;
             int j = 1;
             //Se recorre el camino desde el nodo objetivo hasta el nodo inicial (de padre -1)
             while (padreDijkstra[i] != -1) {
-                lineasRecorridas.add(mismaLinea(i,padreDijkstra[i]));
+                lineasRecorridas.add(mismaLinea(i, padreDijkstra[i]));
                 nodosRecorrido[j] = padreDijkstra[i];
                 j++;
                 i = padreDijkstra[i];
             }
-            costoRecorrido = (lineasRecorridas.size()-1)*pTransbordo+pAbordaje;
-            return new RespuestaOptimizador(dist[nodoObjetivo],nodosRecorrido, costoRecorrido);
+            costoRecorrido = (lineasRecorridas.size() - 1) * pTransbordo + pAbordaje;
+            return new RespuestaOptimizador(dist[estacionObjetivo], nodosRecorrido, costoRecorrido);
         }
     }
 
@@ -208,14 +207,6 @@ public class SkyLink implements Optimizador {
     }
 
     public static void mostrarArreglo(int[] arr) {
-        System.out.print("[" + arr[0]);
-        for (int i = 1; i < arr.length; i++) {
-            System.out.print("," + arr[i]);
-        }
-        System.out.print("]");
-    }
-
-    public static void mostrarArreglo(boolean[] arr) {
         System.out.print("[" + arr[0]);
         for (int i = 1; i < arr.length; i++) {
             System.out.print("," + arr[i]);

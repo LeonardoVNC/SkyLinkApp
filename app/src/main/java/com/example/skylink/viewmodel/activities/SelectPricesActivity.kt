@@ -15,6 +15,7 @@ import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_REA
 import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
+//Activity para la selección de los precios disponibles
 class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener {
     private lateinit var binding: ActivitySelectPricesBinding
     private val recyclerPriceAdapter by lazy { PreciosAdapter(this) }
@@ -27,9 +28,11 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
         setContentView(view)
         setUpRecyclerView()
 
+        //Se agregan los observers para notificarles cuando se cambien los precios
         registerObserver(SKYLINK_SINGLETON)
         registerObserver(LAST_ROUTE_SINGLETON)
 
+        //Configuración de botones y clicks
         binding.selectPriceButtonBack.setOnClickListener{ onBackPressed() }
     }
 
@@ -44,6 +47,7 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
         }
     }
 
+    //Implementación del patrón Observer
     @Override
     override fun registerObserver(observer: PriceObserver) {
         observers.add(observer)
@@ -61,10 +65,13 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
         }
     }
 
+    //Al hacer click en uno de los items, se sobreescribe la información del precio usado en la app
     override fun onItemClick(titulo: String) {
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
         sharedPreferences.edit().putString(ID_SELECTED_PRICE, titulo).apply()
         Toast.makeText(this, "Seleccionado precio para: ${titulo}", Toast.LENGTH_SHORT).show()
+        //También se notifica a los observers, ya que el cambio en precios genera cambio en
+        // el monto de las rutas ya calculadas
         notifyObservers()
     }
 }

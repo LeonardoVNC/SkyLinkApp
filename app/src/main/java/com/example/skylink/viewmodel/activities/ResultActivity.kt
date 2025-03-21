@@ -15,11 +15,12 @@ import com.example.skylink.databinding.ActivityResultBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
 
+//Activity que muestra toda la información de la ruta optimizada, como el tiempo requerido, el recorrido y el precio
 class ResultActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivityResultBinding
     private val recyclerTerminalAdapter by lazy { EstacionesAdapter(this) }
-    private var nodoInicial = -1
-    private var nodoFinal = -1
+    private var estacionOrigen = -1
+    private var estacionDestino = -1
     private var tiempo = -1
     private lateinit var recorrido: IntArray
     private var precio = -1.0
@@ -29,11 +30,13 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        //Determinamos el modo en que se llegó a esta Activity
+        // puede ser una solicitud nueva o recarga de una anterior
         val llamada = intent.getStringExtra(ID_LLAMADA_SKYLINK) ?: "Error"
+        //Cargamos los datos desde la respuesta del Optimizador o del Proxy
         cargaDeDatos(llamada)
 
-        //Establecer el tiempo
+        //Establecer el valor de tiempo
         if (tiempo  == -1) {
             println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
             val intent = Intent(this, MainActivity::class.java)
@@ -80,21 +83,23 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         }
     }
 
+    //Función que solicita la respuesta del Optimizador y procesa sus datos
     private fun cargaDeDatos(llamada: String) {
         var respuesta: RespuestaOptimizador
         when (llamada) {
             "Optimizar" -> {
-                //Nodos a usar en la optimización de la ruta
-                nodoInicial = intent.getIntExtra(ID_INPUT_BEGIN, -1)
-                nodoFinal = intent.getIntExtra(ID_INPUT_END, -1)
+                //Estaciones a usar en la optimización de la ruta
+                estacionOrigen = intent.getIntExtra(ID_INPUT_BEGIN, -1)
+                estacionDestino = intent.getIntExtra(ID_INPUT_END, -1)
 
                 //Respuesta`desde SkyLink
-                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).optimizarRuta(nodoInicial, nodoFinal)
+                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).optimizarRuta(estacionOrigen, estacionDestino)
             }
             "Recargar" -> {
                 //Carga la respuesta desde el cache de Proxy
-                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).getLastOptmization()
+                respuesta = LAST_ROUTE_SINGLETON.getInstance(this).getLastOptimization()
             }
+            //Si la llamada aún no está establecida, se lanza una excepción
             else -> throw IllegalArgumentException("Valor de llamada $llamada no válido")
         }
         tiempo = respuesta.tiempo
@@ -102,8 +107,11 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         precio = respuesta.precio
     }
 
+    //Al hacer click en las estaciones mostradas en el recorrido no ocurre nada
     override fun onItemClick(input: Int) {}
 
+    //Se sobreescribe el uso de onBackPressed para evitar que se pueda volver a la selección de estaciones
+    // ya que puede generar errores si no se inicia nuevamente la Activity
     override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack

@@ -6,6 +6,9 @@ import com.example.skylink.R
 import com.example.skylink.databinding.ActivityDevBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
+//Activity usada para mostrar opciones de desarrollo, como imprimir las estructuras de datos
+// para detectar errores
+// No recibe mucho mantenimiento
 class DevActivity : BaseActivity() {
     private lateinit var binding: ActivityDevBinding
 

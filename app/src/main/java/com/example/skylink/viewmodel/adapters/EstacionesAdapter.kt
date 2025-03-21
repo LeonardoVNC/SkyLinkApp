@@ -9,6 +9,7 @@ import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ItemTerminalBinding
 
+//Clase que sirve para adaptar el uso de los recycler views que muestran una lista de estaciones
 class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerView.Adapter<EstacionesAdapter.EstacionViewHolder>() {
     private val datos = mutableListOf<Estacion>()
     private var context: Context?=null

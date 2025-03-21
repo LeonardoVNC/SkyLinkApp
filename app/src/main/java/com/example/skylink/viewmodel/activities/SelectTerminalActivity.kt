@@ -14,6 +14,7 @@ import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivitySelectTerminalBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 
+//Activity para seleccionar las estaciones de origen y objetivo
 class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivitySelectTerminalBinding
     private val recyclerTerminalAdapter by lazy { EstacionesAdapter(this) }
@@ -26,8 +27,10 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         binding = ActivitySelectTerminalBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        //Cargamos el contenido del recyclerview para mostrar todas las estaciones
         setUpRecyclerView()
 
+        //Configuración de botones y clicks
         binding.terminalButtonBack.setOnClickListener{
             if (begin) {
                 onBackPressed()
@@ -37,6 +40,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         }
     }
 
+    //Al hacer click en uno de los items, se guarda su contenido en los nodos a usar
     override fun onItemClick(input: Int) {
         if (begin) {
             inputBegin = input
@@ -53,18 +57,21 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         }
     }
 
+    //Establece las variables para introducir el primer input, la estacion de origen
     private fun setBeginInput () {
         inputBegin = -1
         begin = true
         binding.terminalDescription.text = getString(R.string.terminal_text_begin)
     }
 
+    //Establece las variables para introducir el segundo input, la estación destino
     private fun setEndInput () {
         inputEnd = -1
         begin = false
         binding.terminalDescription.text = getString(R.string.terminal_text_end)
     }
 
+    //Valor usado para ordenar las estaciones por color
     val lineaConPrioridad = mapOf(
         R.color.roja to 1,
         R.color.amarilla to 2,
@@ -82,6 +89,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     private fun setUpRecyclerView() {
         val listaDeDatos = mutableListOf<Estacion>()
         listaDeDatos.addAll(LIST_ESTACIONES)
+        //Se ordenan las estaciones por su color principal
         listaDeDatos.sortWith(compareBy { lineaConPrioridad[it.color] ?: Int.MAX_VALUE })
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
         binding.terminalRecycler.apply() {

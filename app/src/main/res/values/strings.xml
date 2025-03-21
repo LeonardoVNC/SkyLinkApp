@@ -1,16 +1,37 @@
 <resources>
     <string name="app_name">SkyLink</string>
 
-    <!-- Configuraciones -->
-    <string name="config_price">Cambiar precios</string>
-    <string name="config_theme">Cambiar tema</string>
-    <string name="config_dev">Opciones de desarrollo</string>
+    <!-- Main Activity -->
+    <string name="main_welcome">¡Bienvenido!</string>
+    <string name="main_welcome_desc">¿Cómo podemos ayudarlo el día de hoy?</string>
+    <string name="main_desc_route">Optimizar ruta</string>
+    <string name="main_desc_prices">Establecer precios</string>
+    <string name="main_desc_last">Último recorrido</string>
+    <string name="main_desc_config">Configuraciones</string>
+
+    <!-- Selector de estaciones -->
+    <string name="terminal_text_begin">Seleccione su estación actual</string>
+    <string name="terminal_text_end">Seleccione su estación objetivo</string>
+    <string name="item_terminal_def">Nombre de la estación</string>
+
+    <!-- Resultado -->
+    <string name="result_desc">Los resultados son los siguientes:</string>
+    <string name="result_time_desc">El tiempo necesario para completar su trayecto es de:</string>
+    <string name="result_time">minutos</string>
+    <string name="result_price_desc">El precio a pagar por su trayecto es de:</string>
+    <string name="result_price">Bs</string>
+    <string name="result_route">Su trayecto está conformado por las siguientes estaciones:</string>
+    <string name="result_button_reset">Volver al inicio</string>
 
     <!-- Cambiar Precios -->
-    <string name="select_price_button">Seleccionar</string>
     <string name="select_price_desc">Seleccione la categoria a la que corresponde:</string>
     <string name="item_price_board">Precio abordaje:</string>
     <string name="item_price_transboard">Precio transbordo:</string>
+
+    <!-- Configuraciones -->
+    <string name="config_price">Establecer precios</string>
+    <string name="config_theme">Cambiar tema</string>
+    <string name="config_dev">Opciones de desarrollo</string>
 
     <!-- Selector de temas -->
     <string name="desc_themes">Seleccione un tema:</string>
@@ -25,31 +46,8 @@
     <!-- Opciones de desarrollo -->
     <string name="dev_title">Opciones de desarollo</string>
     <string name="dev_cmd_desc">Ingrese un comando</string>
-    <string name="dev_desc">Descripción default</string>
     <string name="dev_wrongcmd">Ingrese un comando válido para continuar</string>
     <string name="dev_set">Set de líneas detallado en el LogCat</string>
     <string name="dev_graph">Grafo de estaciones detallado en el LogCat</string>
 
-    <!-- Main Activity -->
-    <string name="main_welcome">¡Bienvenido!</string>
-    <string name="main_welcome_desc">¿Cómo podemos ayudarlo el día de hoy?</string>
-    <string name="main_desc_route">Optimizar ruta</string>
-    <string name="main_desc_prices">Establecer precios</string>
-    <string name="main_desc_last">Último recorrido</string>
-    <string name="main_desc_config">Configuraciones</string>
-
-
-    <!-- Selector de estaciones -->
-    <string name="item_terminal_def">Nombre de la estación</string>
-    <string name="terminal_text_begin">Seleccione su estación actual</string>
-    <string name="terminal_text_end">Seleccione su estación objetivo</string>
-
-    <!-- Resultado -->
-    <string name="result_desc">Los resultados son los siguientes:</string>
-    <string name="result_time_desc">El tiempo necesario para completar su trayecto es de</string>
-    <string name="result_time">minutos</string>
-    <string name="result_price_desc">El precio a pagar por su trayecto es de</string>
-    <string name="result_price">Bs</string>
-    <string name="result_route">Su trayecto está conformado por las siguientes estaciones</string>
-    <string name="result_button_reset">Volver al inicio</string>
 </resources>
