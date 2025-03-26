@@ -42,18 +42,26 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
 
     //Al hacer click en uno de los items, se guarda su contenido en los nodos a usar
     override fun onItemClick(input: Int) {
+        //TODO limpiar este código
         if (begin) {
             inputBegin = input
             setEndInput()
             Toast.makeText(this, "Seleccionada la estación de origen", Toast.LENGTH_SHORT).show()
         } else {
             inputEnd = input
-            val intent = Intent(this, ResultActivity::class.java)
-            Toast.makeText(this, "Seleccionada la estación objetivo", Toast.LENGTH_SHORT).show()
-            intent.putExtra(ID_INPUT_BEGIN, inputBegin)
-            intent.putExtra(ID_INPUT_END, inputEnd)
-            intent.putExtra(ID_LLAMADA_SKYLINK, "Optimizar")
-            startActivity(intent)
+            if (inputEnd == inputBegin) {
+                Toast.makeText(this, "Ya se encuentra en su destino.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, ResultActivity::class.java)
+                Toast.makeText(this, "Seleccionada la estación objetivo", Toast.LENGTH_SHORT).show()
+                intent.putExtra(ID_INPUT_BEGIN, inputBegin)
+                intent.putExtra(ID_INPUT_END, inputEnd)
+                intent.putExtra(ID_LLAMADA_SKYLINK, "Optimizar")
+                startActivity(intent)
+            }
         }
     }
 

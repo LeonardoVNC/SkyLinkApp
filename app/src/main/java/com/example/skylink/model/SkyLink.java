@@ -10,7 +10,6 @@ public class SkyLink implements Optimizador {
     //Parámetros para la inicialización de la clase
     private LinkedList<int[]>[] grafo;
     private Set<Integer>[] lineas;
-    private Map<Integer, String> nombreEstaciones;
     private int nodos;
     private int numLineas;
     private double pAbordaje;
@@ -23,7 +22,6 @@ public class SkyLink implements Optimizador {
 
     public SkyLink(String tipoCliente, Context context) {
         inicializarGrafo(context);
-        inicializarNombreEstaciones();
         setTipoCliente(tipoCliente, context);
     }
 
@@ -56,49 +54,8 @@ public class SkyLink implements Optimizador {
             int tiempo = estructuraGrafo.get(i).get(2);
             grafo[estacionA].add(new int[]{estacionB, tiempo});
             grafo[estacionB].add(new int[]{estacionA, tiempo});
-            System.out.println(i);
             i++;
         }
-    }
-
-    //Método encargado de asignar un nombre a cada uno de los nodos o estaciones
-    public void inicializarNombreEstaciones() {
-        nombreEstaciones = new HashMap<>();
-        nombreEstaciones.put(0, "Río Seco");
-        nombreEstaciones.put(1, "UPEA");
-        nombreEstaciones.put(2, "Plaza La Paz");
-        nombreEstaciones.put(3, "Plaza La Libertad");
-        nombreEstaciones.put(4, "16 de Julio");
-        nombreEstaciones.put(5, "Cementerio");
-        nombreEstaciones.put(6, "Central");
-        nombreEstaciones.put(7, "Armentia");
-        nombreEstaciones.put(8, "Periférica");
-        nombreEstaciones.put(9, "Villarroel");
-        nombreEstaciones.put(10, "Busch");
-        nombreEstaciones.put(11, "Triangular");
-        nombreEstaciones.put(12, "Del Poeta");
-        nombreEstaciones.put(13, "Las Villas");
-        nombreEstaciones.put(14, "Prado");
-        nombreEstaciones.put(15, "Teatro al Aire Libre");
-        nombreEstaciones.put(16, "Libertador");
-        nombreEstaciones.put(17, "Alto Obrajes");
-        nombreEstaciones.put(18, "Obrajes");
-        nombreEstaciones.put(19, "Irpavi");
-        nombreEstaciones.put(20, "Sopocachi");
-        nombreEstaciones.put(21, "Buenos Aires");
-        nombreEstaciones.put(22, "Mirador");
-        nombreEstaciones.put(23, "6 de Marzo");
-        nombreEstaciones.put(24, "Faro Murillo");
-        nombreEstaciones.put(25, "Obelisco");
-    }
-
-    //Método que devuelve el valor asignado del mapD nombreEstaciones
-    public String estNomb(int key) {
-        if (!nombreEstaciones.containsKey(key)) {
-            System.out.println("Error en estNomb, verica la key y el estado del map nombreEstaciones.");
-            return "";
-        }
-        return nombreEstaciones.get(key);
     }
 
     //Método encargado de definir el precio de abordo y transbordo según el tipo de cliente
@@ -111,10 +68,6 @@ public class SkyLink implements Optimizador {
 
     @Override
     public RespuestaOptimizador optimizarRuta(int estacionOrigen, int estacionObjetivo) {
-        if (estacionOrigen == estacionObjetivo) {
-            System.out.println("Ruta a la misma estación, no hay costo ni ruta.");
-            return new RespuestaOptimizador(0, new int[]{}, 0.0);
-        }
         dist = new int[grafo.length];
         padreDijkstra = new int[grafo.length];
         Arrays.fill(dist, INF);     //Se llena el arreglo de distancias con infinito para luego compararlo
@@ -142,8 +95,7 @@ public class SkyLink implements Optimizador {
         }
         //Si nunca visitamos al nodo objetivo, INF no habra sido sobreescrito
         if (dist[estacionObjetivo] == INF) {
-            System.out.println("No se puede llegar desde " + estNomb(estacionOrigen) + " hasta " + estNomb(estacionObjetivo));
-            return new RespuestaOptimizador(-1, new int[]{-1}, -1.0);
+            throw new IllegalArgumentException("No existe camino entre los nodos " + estacionOrigen + " y " + estacionObjetivo);
         } else {
             int[] nodosRecorrido = new int[grafo.length];
             Arrays.fill(nodosRecorrido, -1);
