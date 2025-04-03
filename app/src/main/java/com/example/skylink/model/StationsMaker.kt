@@ -5,7 +5,7 @@ import com.example.skylink.R
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_READER
 
-class StationsMaker() {
+class StationsMaker() : StationLoader {
     var mapIDs = mutableMapOf<String, Int>(
         "azul" to R.color.azul,
         "rojo" to R.color.roja,
@@ -19,7 +19,7 @@ class StationsMaker() {
         "morado" to R.color.morada
     )
 
-    fun loadStationList (context: Context): List<Estacion> {
+    override fun loadStationList (context: Context): List<Estacion> {
         val data = ASSET_READER.loadStations(context)
         val listEstaciones = mutableListOf<Estacion>();
         for (i in data.indices) {
