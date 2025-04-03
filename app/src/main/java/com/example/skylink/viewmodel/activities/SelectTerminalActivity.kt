@@ -8,7 +8,7 @@ import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.R
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_END
-import com.example.skylink.model.singletons.CompanionObjects.Companion.LIST_ESTACIONES
+import com.example.skylink.model.singletons.CompanionObjects.Companion.STATIONS_MAKER
 import com.example.skylink.viewmodel.adapters.EstacionesAdapter
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivitySelectTerminalBinding
@@ -96,9 +96,9 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     //Función que carga todos los items del RecyclerView
     private fun setUpRecyclerView() {
         val listaDeDatos = mutableListOf<Estacion>()
-        listaDeDatos.addAll(LIST_ESTACIONES)
+        listaDeDatos.addAll(STATIONS_MAKER.loadStationList(this))
         //Se ordenan las estaciones por su color principal
-        listaDeDatos.sortWith(compareBy { lineaConPrioridad[it.color] ?: Int.MAX_VALUE })
+        listaDeDatos.sortWith(compareBy { lineaConPrioridad[it.color[0]] ?: Int.MAX_VALUE })
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
         binding.terminalRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

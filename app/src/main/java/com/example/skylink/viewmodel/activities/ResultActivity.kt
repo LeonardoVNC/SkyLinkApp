@@ -7,7 +7,7 @@ import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.R
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_END
-import com.example.skylink.model.singletons.CompanionObjects.Companion.LIST_ESTACIONES
+import com.example.skylink.model.singletons.CompanionObjects.Companion.STATIONS_MAKER
 import com.example.skylink.viewmodel.adapters.EstacionesAdapter
 import com.example.skylink.model.customDataStructures.RespuestaOptimizador
 import com.example.skylink.model.dataClasses.Estacion
@@ -62,7 +62,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
             if(this.recorrido[estacion] == -1) {
                 break
             }
-            recorrido.add(LIST_ESTACIONES.get(this.recorrido[estacion]))
+            recorrido.add(STATIONS_MAKER.loadStationList(this).get(this.recorrido[estacion]))
         }
         setUpRecyclerView(recorrido)
 

@@ -30,7 +30,7 @@ class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerV
     inner class EstacionViewHolder(private val binding: ItemTerminalBinding): RecyclerView.ViewHolder(binding.root) {
         fun binding(data: Estacion){
             binding.itemTerminalDesc.text = data.nombre
-            binding.itemTerminalImage.setColorFilter(ContextCompat.getColor(context!!, data.color))
+            binding.itemTerminalImage.setColorFilter(ContextCompat.getColor(context!!, data.color[0]))
             // Configura el listener para el clic
             binding.root.setOnClickListener {
                 listener.onItemClick(data.inputID) // Suponiendo que 'id' es el int que deseas enviar

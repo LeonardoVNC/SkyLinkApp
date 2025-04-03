@@ -1,6 +1,7 @@
 package com.example.skylink.model.dataReader
 
 import android.content.Context
+import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.model.dataClasses.Precios
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -75,5 +76,18 @@ class LectorAssets {
             }
         }
         return estructuraGrafo
+    }
+    //Funcion que retorna la información de estaciones.txt
+    fun loadStations(context: Context): List<List<String>> {
+        val data = mutableListOf<List<String>>()
+        val inputStream = context.assets.open("estaciones.txt")
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        reader.use { br ->
+            br.forEachLine { line ->
+                val parts = line.split(",")
+                data.add(parts)
+            }
+        }
+        return data
     }
 }
