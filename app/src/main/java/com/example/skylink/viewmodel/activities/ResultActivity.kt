@@ -65,7 +65,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
             }
             recorrido.add(listaEstaciones.get(this.recorrido[estacion]))
         }
-        setUpRecyclerView(recorrido)
+        setUpRecyclerView(recorrido.reversed())
 
         //Button Listeners
         binding.resultButtonReset.setOnClickListener {

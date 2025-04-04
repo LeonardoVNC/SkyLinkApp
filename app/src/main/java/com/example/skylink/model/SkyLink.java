@@ -97,6 +97,7 @@ public class SkyLink implements Optimizador {
         if (dist[estacionObjetivo] == INF) {
             throw new IllegalArgumentException("No existe camino entre los nodos " + estacionOrigen + " y " + estacionObjetivo);
         } else {
+            int tiempoS = dist[estacionObjetivo];
             int[] nodosRecorrido = new int[grafo.length];
             Arrays.fill(nodosRecorrido, -1);
             Set<Integer> lineasRecorridas = new HashSet<>();
@@ -111,10 +112,13 @@ public class SkyLink implements Optimizador {
                 lineasRecorridas.add(mismaLinea(i, padreDijkstra[i]));
                 nodosRecorrido[j] = padreDijkstra[i];
                 j++;
+                tiempoS+=40;
                 i = padreDijkstra[i];
             }
             costoRecorrido = (lineasRecorridas.size() - 1) * pTransbordo + pAbordaje;
-            return new RespuestaOptimizador(dist[estacionObjetivo], nodosRecorrido, costoRecorrido);
+            int tiempoM = tiempoS/60;
+            if (tiempoS%60 >=30) tiempoM++;
+            return new RespuestaOptimizador(tiempoM, nodosRecorrido, costoRecorrido);
         }
     }
 
