@@ -1,5 +1,6 @@
 package com.example.skylink.viewmodel.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.skylink.R
@@ -17,5 +18,12 @@ open class BaseActivity : AppCompatActivity() {
         val savedTheme = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)
         setTheme(savedTheme)
         super.onCreate(savedInstanceState)
+    }
+
+    //Función para limpiar el BackStack y volver a la primera pantalla
+    fun eraseBackStack() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

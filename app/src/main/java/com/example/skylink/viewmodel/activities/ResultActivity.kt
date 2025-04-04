@@ -1,14 +1,9 @@
 package com.example.skylink.viewmodel.activities
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.R
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
@@ -18,6 +13,7 @@ import com.example.skylink.viewmodel.adapters.EstacionesAdapter
 import com.example.skylink.model.customDataStructures.RespuestaOptimizador
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
+import com.example.skylink.databinding.DialogTerminalBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
@@ -48,9 +44,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         //Establecer el valor de tiempo
         if (tiempo  == -1) {
             println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-            startActivity(intent)
+            eraseBackStack()
         } else {
             binding.resultTime.text = "$tiempo ${getString(R.string.result_time)}"
         }
@@ -58,9 +52,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         //Establecer el precio
         if (precio == -1.0) {
             println("Ha ocurrido un error en la conexión de los nodos, verifique SkyLink.inicializarGrafo()")
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-            startActivity(intent)
+            eraseBackStack()
         }else {
             binding.resultPrice.text = "${String.format("%.2f", precio)} ${getString(R.string.result_price)}"
         }
@@ -77,9 +69,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
 
         //Button Listeners
         binding.resultButtonReset.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-            startActivity(intent)
+            eraseBackStack()
         }
     }
 
@@ -118,43 +108,37 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
 
     //TODO Al hacer click en las estaciones se debería mostrar una descripción de la misma
     override fun onItemClick(input: Int) {
-        val terminal = listaEstaciones.get(input)
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_terminal)
+        val terminal = listaEstaciones[input]
+        val dialog = Dialog(this, R.style.DialogSinFondo)
+        val binding = DialogTerminalBinding.inflate(layoutInflater)
+        dialog.setContentView(binding.root)
 
-        // Button back
-        val buttonBack = dialog.findViewById<ImageButton>(R.id.dialog_terminal_button_back)
-        buttonBack.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        // Título
-        val textTitle = dialog.findViewById<TextView>(R.id.dialog_terminal_title)
+        // Título de la descripción
         val preTitle = ContextCompat.getString(this, R.string.dialog_terminal_pre_title)
-        textTitle.text = "$preTitle ${terminal.nombre}"
+        binding.dialogTerminalTitle.text = "$preTitle ${terminal.nombre}"
 
-        //Color
-        val image = dialog.findViewById<ImageView>(R.id.dialog_terminal_image)
-        image.setColorFilter(ContextCompat.getColor(this, COLOR_GETTER.getColorID(terminal.lineas[0])))
-        dialog.show()
+        // Color principal de la estación
+        val color = ContextCompat.getColor(this, COLOR_GETTER.getColorID(terminal.lineas[0]))
+        binding.dialogTerminalImage.setColorFilter(color)
 
-        //Recycler
-        val recyclerDialogTerminalAdapter by lazy { DialogTerminalAdapter() }
-        val recycler = dialog.findViewById<RecyclerView>(R.id.dialog_terminal_recycler)
-        recyclerDialogTerminalAdapter.addDataToList(terminal.lineas)
-        recycler.apply {
+        // Recycler view que muestra las líneas a las que pertenece la estación descrita
+        val recyclerDialogTerminalAdapter = DialogTerminalAdapter()
+        binding.dialogTerminalRecycler.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = recyclerDialogTerminalAdapter
         }
+        recyclerDialogTerminalAdapter.addDataToList(terminal.lineas)
 
+        binding.dialogTerminalButtonBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     //Se sobreescribe el uso de onBackPressed para evitar que se pueda volver a la selección de estaciones
     // ya que puede generar errores si no se inicia nuevamente la Activity
     override fun onBackPressed() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-        startActivity(intent)
+        eraseBackStack()
         super.onBackPressed()
     }
 }

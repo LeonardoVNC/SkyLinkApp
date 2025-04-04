@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@android:color/transparent"
     android:layout_height="wrap_content">
 
     <!-- Contenido del item -->
@@ -14,8 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:backgroundTint="?attr/colorSurface">
+            android:padding="15dp">
             <!--Imagén de acompañamiento -->
             <ImageView
                 android:id="@+id/item_terminal_image"

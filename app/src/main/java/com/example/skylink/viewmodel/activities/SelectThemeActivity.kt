@@ -26,9 +26,7 @@ class SelectThemeActivity : BaseActivity() {
         //Configuración de botones y clicks
         binding.selectThemeButtonSave.setOnClickListener {
             sharedPreferences.edit().putInt(SELECTED_THEME, tema).apply()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK     //Se limpia el BackStack
-            startActivity(intent)
+            eraseBackStack()
         }
         binding.selectThemeButtonBack.setOnClickListener { onBackPressed() }
 
