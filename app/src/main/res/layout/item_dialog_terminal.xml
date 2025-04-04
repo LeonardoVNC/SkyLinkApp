@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Imagen -->
+    <ImageView
+        android:id="@+id/item_dialog_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/hugeicons__cable_car"
+        android:background="@drawable/hugeicons__cable_car"/>
+
+    <!-- Descripción -->
+    <TextView
+        android:id="@+id/item_dialog_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_dialog_image"
+        android:textStyle="bold|italic"
+        android:background="@android:color/transparent"
+        android:text="Test"
+        android:layout_margin="10dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

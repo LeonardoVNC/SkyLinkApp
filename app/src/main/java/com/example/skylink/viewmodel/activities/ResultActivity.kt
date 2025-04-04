@@ -1,8 +1,14 @@
 package com.example.skylink.viewmodel.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.R
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
@@ -12,8 +18,10 @@ import com.example.skylink.viewmodel.adapters.EstacionesAdapter
 import com.example.skylink.model.customDataStructures.RespuestaOptimizador
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivityResultBinding
+import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 import com.example.skylink.model.singletons.CompanionObjects.Companion.LAST_ROUTE_SINGLETON
+import com.example.skylink.viewmodel.adapters.DialogTerminalAdapter
 
 //Activity que muestra toda la información de la ruta optimizada, como el tiempo requerido, el recorrido y el precio
 class ResultActivity : BaseActivity(), OnStationClickListener {
@@ -24,6 +32,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     private var tiempo = -1
     private lateinit var recorrido: IntArray
     private var precio = -1.0
+    private var listaEstaciones = STATIONS_MAKER.loadStationList(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +71,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
             if(this.recorrido[estacion] == -1) {
                 break
             }
-            recorrido.add(STATIONS_MAKER.loadStationList(this).get(this.recorrido[estacion]))
+            recorrido.add(listaEstaciones.get(this.recorrido[estacion]))
         }
         setUpRecyclerView(recorrido)
 
@@ -107,8 +116,37 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         precio = respuesta.precio
     }
 
-    //Al hacer click en las estaciones mostradas en el recorrido no ocurre nada
-    override fun onItemClick(input: Int) {}
+    //TODO Al hacer click en las estaciones se debería mostrar una descripción de la misma
+    override fun onItemClick(input: Int) {
+        val terminal = listaEstaciones.get(input)
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_terminal)
+
+        // Button back
+        val buttonBack = dialog.findViewById<ImageButton>(R.id.dialog_terminal_button_back)
+        buttonBack.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Título
+        val textTitle = dialog.findViewById<TextView>(R.id.dialog_terminal_title)
+        textTitle.text = terminal.nombre
+
+        //Color
+        val image = dialog.findViewById<ImageView>(R.id.dialog_terminal_image)
+        image.setColorFilter(ContextCompat.getColor(this, COLOR_GETTER.getColorID(terminal.lineas[0])))
+        dialog.show()
+
+        //Recycler
+        val recyclerDialogTerminalAdapter by lazy { DialogTerminalAdapter() }
+        val recycler = dialog.findViewById<RecyclerView>(R.id.dialog_terminal_recycler)
+        recyclerDialogTerminalAdapter.addDataToList(terminal.lineas)
+        recycler.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = recyclerDialogTerminalAdapter
+        }
+
+    }
 
     //Se sobreescribe el uso de onBackPressed para evitar que se pueda volver a la selección de estaciones
     // ya que puede generar errores si no se inicia nuevamente la Activity

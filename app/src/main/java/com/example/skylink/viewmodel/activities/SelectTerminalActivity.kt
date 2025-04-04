@@ -12,6 +12,7 @@ import com.example.skylink.model.singletons.CompanionObjects.Companion.STATIONS_
 import com.example.skylink.viewmodel.adapters.EstacionesAdapter
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivitySelectTerminalBinding
+import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
 
 //Activity para seleccionar las estaciones de origen y objetivo
@@ -98,7 +99,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         val listaDeDatos = mutableListOf<Estacion>()
         listaDeDatos.addAll(STATIONS_MAKER.loadStationList(this))
         //Se ordenan las estaciones por su color principal
-        listaDeDatos.sortWith(compareBy { lineaConPrioridad[it.color[0]] ?: Int.MAX_VALUE })
+        listaDeDatos.sortWith(compareBy { lineaConPrioridad[COLOR_GETTER.getColorID(it.lineas[0])] ?: Int.MAX_VALUE })
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
         binding.terminalRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

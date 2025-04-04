@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ItemTerminalBinding
+import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 
 //Clase que sirve para adaptar el uso de los recycler views que muestran una lista de estaciones
 class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerView.Adapter<EstacionesAdapter.EstacionViewHolder>() {
@@ -30,7 +31,7 @@ class EstacionesAdapter(private val listener: OnStationClickListener): RecyclerV
     inner class EstacionViewHolder(private val binding: ItemTerminalBinding): RecyclerView.ViewHolder(binding.root) {
         fun binding(data: Estacion){
             binding.itemTerminalDesc.text = data.nombre
-            binding.itemTerminalImage.setColorFilter(ContextCompat.getColor(context!!, data.color[0]))
+            binding.itemTerminalImage.setColorFilter(ContextCompat.getColor(context!!, COLOR_GETTER.getColorID(data.lineas[0])))
             // Configura el listener para el clic
             binding.root.setOnClickListener {
                 listener.onItemClick(data.inputID) // Suponiendo que 'id' es el int que deseas enviar

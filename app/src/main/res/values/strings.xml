@@ -43,6 +43,9 @@
     <string name="theme_dark">Oscuro</string>
     <string name="theme_light">Claro</string>
 
+    <!-- Dialog Info estaciones -->
+    <string name="dialog_terminal_color_subtitle">Líneas a las que pertenece:</string>
+
     <!-- Opciones de desarrollo -->
     <string name="dev_title">Opciones de desarollo</string>
     <string name="dev_cmd_desc">Ingrese un comando</string>
