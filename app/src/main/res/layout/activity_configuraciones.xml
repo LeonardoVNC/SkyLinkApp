@@ -41,7 +41,7 @@
             android:background="?attr/colorSurface"
             android:padding="10dp">
             <TextView
-                style="@style/SubtitleText"
+                style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -69,7 +69,7 @@
             android:background="?attr/colorSurface"
             android:padding="10dp">
             <TextView
-                style="@style/SubtitleText"
+                style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -99,7 +99,7 @@
             android:visibility="gone"
             android:padding="10dp">
             <TextView
-                style="@style/SubtitleText"
+                style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"

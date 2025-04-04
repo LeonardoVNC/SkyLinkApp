@@ -32,7 +32,7 @@
     <!-- Texto Descripción -->
     <TextView
         android:id="@+id/terminal_description"
-        style="@style/SubtitleText"
+        style="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"

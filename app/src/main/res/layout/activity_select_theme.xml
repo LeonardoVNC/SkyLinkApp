@@ -27,7 +27,7 @@
     <!-- Título -->
     <TextView
         android:id="@+id/select_theme_description"
-        style="@style/SubtitleText"
+        style="@style/Title"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
         android:gravity="center"

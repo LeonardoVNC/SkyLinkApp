@@ -31,7 +31,7 @@
             <!-- Nombre de la estación -->
             <TextView
                 android:id="@+id/dialog_terminal_title"
-                style="@style/SubtitleText"
+                style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Test"
@@ -57,8 +57,7 @@
             <!-- Subtitulo Colores -->
             <TextView
                 android:id="@+id/dialog_terminal_subtitle"
-                style="@style/SubtitleText"
-                android:textSize="20sp"
+                style="@style/Subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_terminal_color_subtitle"

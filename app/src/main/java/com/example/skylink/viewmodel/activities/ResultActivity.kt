@@ -106,7 +106,6 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
         precio = respuesta.precio
     }
 
-    //TODO Al hacer click en las estaciones se debería mostrar una descripción de la misma
     override fun onItemClick(input: Int) {
         val terminal = listaEstaciones[input]
         val dialog = Dialog(this, R.style.DialogSinFondo)

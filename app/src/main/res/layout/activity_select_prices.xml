@@ -29,7 +29,7 @@
     <!-- Contenido principal -->
     <TextView
         android:id="@+id/select_price_description"
-        style="@style/SubtitleText"
+        style="@style/Title"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:gravity="center"

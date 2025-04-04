@@ -19,14 +19,13 @@
 
     <!-- Descripción -->
     <TextView
+        style="@style/Subtitle"
         android:id="@+id/item_dialog_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_dialog_image"
-        android:textStyle="bold|italic"
-        android:textSize="18sp"
         android:background="@android:color/transparent"
         android:text="Test"
         android:layout_margin="10dp"/>
