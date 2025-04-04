@@ -10,6 +10,7 @@ import com.example.skylink.R
 import com.example.skylink.databinding.ItemDialogTerminalBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 
+//Adapter para el Dialog descriptivo de las estaciones de un recorrido
 class DialogTerminalAdapter: RecyclerView.Adapter<DialogTerminalAdapter.DialogTerminalViewHolder>() {
     private val datos = mutableListOf<String>()
     private var context: Context?=null

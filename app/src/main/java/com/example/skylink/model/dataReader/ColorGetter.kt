@@ -2,6 +2,7 @@ package com.example.skylink.model.dataReader
 
 import com.example.skylink.R
 
+//Clase encargada del manejo de los IDs de los colores de los recursos
 class ColorGetter {
     var mapColorToID = mutableMapOf(
         "azul" to R.color.azul,

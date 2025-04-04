@@ -1,12 +1,12 @@
 package com.example.skylink.model
 
 import android.content.Context
-import com.example.skylink.R
 import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_READER
 
-class StationsMaker() : StationLoader {
-    override fun loadStationList (context: Context): List<Estacion> {
+//Clase encargada de crear la lista de Estaciones
+class TerminalListMaker() : TerminalLoader {
+    override fun loadTerminalList (context: Context): List<Estacion> {
         val data = ASSET_READER.loadStations(context)
         val listEstaciones = mutableListOf<Estacion>();
         for (i in data.indices) {

@@ -3,13 +3,14 @@ package com.example.skylink.model
 import android.content.Context
 import com.example.skylink.model.dataClasses.Estacion
 
-class ProxyStationsMaker : StationLoader {
+//Clase encargada de guardar en cache la lista de estaciones para mantener buen rendimiento en la App
+class ProxyStationsMaker : TerminalLoader {
     lateinit var stationsList: List<Estacion>
     var cached = false
 
-    override fun loadStationList(context: Context): List<Estacion> {
+    override fun loadTerminalList(context: Context): List<Estacion> {
         if (!cached) {
-            stationsList = StationsMaker().loadStationList(context)
+            stationsList = TerminalListMaker().loadTerminalList(context)
             cached = true
         }
         return stationsList

@@ -32,7 +32,7 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
     private var tiempo = -1
     private lateinit var recorrido: IntArray
     private var precio = -1.0
-    private var listaEstaciones = STATIONS_MAKER.loadStationList(this)
+    private var listaEstaciones = STATIONS_MAKER.loadTerminalList(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

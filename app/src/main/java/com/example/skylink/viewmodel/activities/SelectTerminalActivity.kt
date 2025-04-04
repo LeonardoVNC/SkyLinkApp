@@ -97,7 +97,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     //Función que carga todos los items del RecyclerView
     private fun setUpRecyclerView() {
         val listaDeDatos = mutableListOf<Estacion>()
-        listaDeDatos.addAll(STATIONS_MAKER.loadStationList(this))
+        listaDeDatos.addAll(STATIONS_MAKER.loadTerminalList(this))
         //Se ordenan las estaciones por su color principal
         listaDeDatos.sortWith(compareBy { lineaConPrioridad[COLOR_GETTER.getColorID(it.lineas[0])] ?: Int.MAX_VALUE })
         recyclerTerminalAdapter.addDataToList(listaDeDatos)
