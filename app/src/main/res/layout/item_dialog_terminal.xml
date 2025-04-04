@@ -9,8 +9,8 @@
     <!-- Imagen -->
     <ImageView
         android:id="@+id/item_dialog_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_dialog_image"
         android:textStyle="bold|italic"
+        android:textSize="18sp"
         android:background="@android:color/transparent"
         android:text="Test"
         android:layout_margin="10dp"/>

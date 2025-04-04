@@ -44,7 +44,9 @@
     <string name="theme_light">Claro</string>
 
     <!-- Dialog Info estaciones -->
+    <string name="dialog_terminal_pre_title">Estación</string>
     <string name="dialog_terminal_color_subtitle">Líneas a las que pertenece:</string>
+    <string name="dialog_terminal_pre_desc">Línea</string>
 
     <!-- Opciones de desarrollo -->
     <string name="dev_title">Opciones de desarollo</string>

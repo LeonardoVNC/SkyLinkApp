@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skylink.R
 import com.example.skylink.databinding.ItemDialogTerminalBinding
 import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 
@@ -28,7 +30,8 @@ class DialogTerminalAdapter: RecyclerView.Adapter<DialogTerminalAdapter.DialogTe
     inner class DialogTerminalViewHolder(private val binding: ItemDialogTerminalBinding): RecyclerView.ViewHolder(binding.root) {
         fun binding(data: String) {
             binding.itemDialogImage.setColorFilter(ContextCompat.getColor(context!!, COLOR_GETTER.getColorID(data)))
-            binding.itemDialogDesc.text = data
+            val preDesc = getString(context!!, R.string.dialog_terminal_pre_desc)
+            binding.itemDialogDesc.text = "$preDesc $data"
         }
     }
 

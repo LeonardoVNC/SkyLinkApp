@@ -130,7 +130,8 @@ class ResultActivity : BaseActivity(), OnStationClickListener {
 
         // Título
         val textTitle = dialog.findViewById<TextView>(R.id.dialog_terminal_title)
-        textTitle.text = terminal.nombre
+        val preTitle = ContextCompat.getString(this, R.string.dialog_terminal_pre_title)
+        textTitle.text = "$preTitle ${terminal.nombre}"
 
         //Color
         val image = dialog.findViewById<ImageView>(R.id.dialog_terminal_image)

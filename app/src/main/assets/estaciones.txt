@@ -2,25 +2,25 @@ Río Seco,azul
 UPEA,azul
 Plaza La Paz,azul
 Plaza Libertad,azul
-16 de Julio,rojo,azul,plateado
-Cementerio,rojo
-Central,rojo,naranja
+16 de Julio,roja,azul,plateada
+Cementerio,roja
+Central,roja,naranja
 Armentia,naranja
 Periférica,naranja
-Villaroel,blanco,naranja
-Busch,blanco,cafe
-Triangular,blanco
-Del Poeta,celeste,blanco
+Villaroel,blanca,naranja
+Busch,blanca,cafe
+Triangular,blanca
+Del Poeta,celeste,blanca
 Las Villas,cafe
 El Prado,celeste
 Teatro al Aire Libre,celeste
-Libertador,amarillo,verde,celeste
+Libertador,amarilla,verde,celeste
 Alto Obrajes,verde
 Obrajes,verde
 Irpavi,verde
-Sopocachi,amarillo
-Buenos Aires,amarillo
-Mirador,amarillo,plateado
-6 de Marzo,morado
-Faro Murillo,morado,plateado
-Obelisco,morado
+Sopocachi,amarilla
+Buenos Aires,amarilla
+Mirador,amarilla,plateada
+6 de Marzo,morada
+Faro Murillo,morada,plateada
+Obelisco,morada
