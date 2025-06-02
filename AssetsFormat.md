@@ -39,3 +39,23 @@ idNodoB idLinea2
 ```
 idNodoA idNodoB tiempo
 ```
+
+## Información Estaciones
+Este asset ubicado en [estaciones.txt](/app/src/main/assets/estaciones.txt) se encarga de cargar información empleada por la aplicación para mostrar los datos de una manera más visual. Asigna nombres a los nodos y también carga la información de las líneas a las que pertence cada estación. 
+
+Para guardar información en este archivo se debe tener en cuenta que cada línea pertenece a una de las estaciones, es decir, la primera línea de código guarda la información del primer nodo del grafo (en la configuración actual, el nodo 0). La estructura de cada línea es la siguiente:
+```
+nombreDeLaEstacion,linea1,linea2...
+```
+Donde se pueden agregar tantas lineas como sea necesario para la estación correspondiente (por lo menos una linea es necesaria).
+
+## Información de Precios
+Este asset ubicado en [precios.txt](/app/src/main/assets/precios.txt) tiene la función de guardar y cargar la información de los precios empleados en la app, al igual que en el asset de estaciones, cada línea del texto guarda información, en este caso, de un precio específico. 
+
+Cada línea del texto guarda información con la siguiente estructura:
+```
+titulo,descripcion,precioAbordaje,precioTransbordo
+```
+>[!Important]
+>Los precios de abordaje y transbordo deben estar escritos en formato int o double.
+
