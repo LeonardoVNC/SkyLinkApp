@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.skylink.R
 import com.example.skylink.databinding.ActivityDevBinding
+import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_READER
 import com.example.skylink.model.singletons.CompanionObjects.Companion.SKYLINK_SINGLETON
 
 //Activity usada para mostrar opciones de desarrollo, como imprimir las estructuras de datos
@@ -19,7 +20,7 @@ class DevActivity : BaseActivity() {
         setContentView(view)
 
         val skyLink = SKYLINK_SINGLETON.getInstance(this)
-        skyLink.inicializarGrafo(this)
+        skyLink.inicializarGrafo(ASSET_READER.getGraphInfo(this))
 
         binding.devButtonBack.setOnClickListener{ onBackPressed() }
         binding.devButtonAccept.setOnClickListener{

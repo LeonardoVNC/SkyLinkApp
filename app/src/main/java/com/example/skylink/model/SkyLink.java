@@ -1,8 +1,6 @@
 package com.example.skylink.model;
 
-import android.content.Context;
 import com.example.skylink.model.customDataStructures.RespuestaOptimizador;
-import com.example.skylink.model.dataReader.LectorAssets;
 import java.util.*;
 
 //Clase encargada de la optimización de rutas, calcular el precio del recorrido y devolver el tiempo
@@ -20,15 +18,19 @@ public class SkyLink implements Optimizador {
     private int[] dist;             //Arreglo que guardará la distancia entre el nodo de inicio y el resto de nodos
     private int[] padreDijkstra;    //Arreglo que guardará al nodo del que viene el camino con menor peso
 
-    public SkyLink(String tipoCliente, Context context) {
-        inicializarGrafo(context);
-        setTipoCliente(tipoCliente, context);
+    public SkyLink(List<List<Integer>> estructuraGrafo, double precioAbordaje, double precioTransbordo) {
+        inicializarGrafo(estructuraGrafo);
+        setPrecios(precioAbordaje, precioTransbordo);
+    }
+
+    //Método encargado de definir el precio de abordo y transbordo
+    public void setPrecios(double precioAbordaje, double precioTransbordo) {
+        pAbordaje = precioAbordaje;
+        pTransbordo = precioTransbordo;
     }
 
     //Método encargado de estructurar el grafo, es no dirigido y tiene ponderación
-    public void inicializarGrafo(Context context) {
-        LectorAssets reader = new LectorAssets();
-        List<List<Integer>> estructuraGrafo = reader.loadGraph(context);
+    public void inicializarGrafo(List<List<Integer>> estructuraGrafo) {
         nodos = estructuraGrafo.get(0).get(0);
         numLineas = estructuraGrafo.get(0).get(1);
 
@@ -56,14 +58,6 @@ public class SkyLink implements Optimizador {
             grafo[estacionB].add(new int[]{estacionA, tiempo});
             i++;
         }
-    }
-
-    //Método encargado de definir el precio de abordo y transbordo según el tipo de cliente
-    public void setTipoCliente(String tipoCliente, Context context) {
-        LectorAssets reader = new LectorAssets();
-        String[] lineaPrecio = reader.searchTitlePrices(context, tipoCliente);
-        pAbordaje = Double.parseDouble(lineaPrecio[2]);
-        pTransbordo = Double.parseDouble(lineaPrecio[3]);
     }
 
     @Override

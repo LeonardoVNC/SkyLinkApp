@@ -39,7 +39,7 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
     //Función que carga todos los items del RecyclerView
     private fun setUpRecyclerView() {
         val listaDeDatos = mutableListOf<Precios>()
-        listaDeDatos.addAll(ASSET_READER.loadPrices(this))
+        listaDeDatos.addAll(ASSET_READER.readPriceData(this))
         recyclerPriceAdapter.addDataToList(listaDeDatos)
         binding.selectPriceRecycler.apply() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
