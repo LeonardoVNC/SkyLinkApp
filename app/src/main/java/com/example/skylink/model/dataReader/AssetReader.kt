@@ -1,14 +1,15 @@
 package com.example.skylink.model.dataReader
 
 import android.content.Context
+import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.model.dataClasses.Precios
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 //Clase uada para la lectura de datos guardados en los distintos assets
-class LectorAssets {
+class AssetReader() : DataReader {
     //Funcion que retorna la información de precios.txt
-    fun loadPrices(context: Context): List<Precios> {
+    override fun readPriceData(context: Context): List<Precios> {
         val listaPrecios = mutableListOf<Precios>()
         val inputStream = context.assets.open("precios.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -27,23 +28,8 @@ class LectorAssets {
         return listaPrecios
     }
 
-    //Función que busca y retorna la información de una de las líneas de precios.txt
-    fun searchTitlePrices(context: Context, titulo: String): Array<String> {
-        val inputStream = context.assets.open("precios.txt")
-        val reader = BufferedReader(InputStreamReader(inputStream))
-        reader.use { br ->
-            for (line in br.lines()) {
-                val parts = line.split(",")
-                if (parts.size == 4 && parts[0].equals(titulo)) {
-                    return arrayOf(parts[0], parts[1], parts[2], parts[3])
-                }
-            }
-        }
-        return arrayOf("Error")
-    }
-
     //Función que retorna la información correspondiente a la estructura del grafo usado por el Optimizador
-    fun loadGraph(context: Context): MutableList<List<Int>> {
+    override fun getGraphInfo(context: Context): MutableList<List<Int>> {
         val estructuraGrafo = mutableListOf<List<Int>>()
         val inputStream = context.assets.open("grafoTeleferico.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -78,14 +64,20 @@ class LectorAssets {
     }
 
     //Funcion que retorna la información de estaciones.txt
-    fun loadStations(context: Context): List<List<String>> {
-        val data = mutableListOf<List<String>>()
+    override fun readTerminalData(context: Context): List<Estacion> {
+        val data = mutableListOf<Estacion>()
         val inputStream = context.assets.open("estaciones.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))
+        var currentID = 0
         reader.use { br ->
             br.forEachLine { line ->
                 val parts = line.split(",")
-                data.add(parts)
+                val nombre = parts[0]
+                val lineas = mutableListOf<String>()
+                for (i in 1..<parts.size) {
+                    lineas.add(parts[i])
+                }
+                data.add(Estacion(nombre, lineas, currentID++))
             }
         }
         return data

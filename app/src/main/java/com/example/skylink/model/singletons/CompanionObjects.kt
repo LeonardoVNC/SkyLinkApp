@@ -2,7 +2,7 @@ package com.example.skylink.model.singletons
 
 import com.example.skylink.model.ProxyStationsMaker
 import com.example.skylink.model.dataReader.ColorGetter
-import com.example.skylink.model.dataReader.LectorAssets
+import com.example.skylink.model.dataReader.AssetReader
 
 //Clase que acumula todos los Companion Objects de la aplicación para facilitar su acceso
 class CompanionObjects {
@@ -16,7 +16,7 @@ class CompanionObjects {
         val SKYLINK_SINGLETON = SkyLinkSingleton()
         val LAST_ROUTE_SINGLETON = UltimaRutaSingleton()
         val ID_LLAMADA_SKYLINK = "SKYLINK_CALL"
-        val ASSET_READER = LectorAssets()
+        val ASSET_READER = AssetReader()
         val STATIONS_MAKER = ProxyStationsMaker()
         val COLOR_GETTER = ColorGetter()
     }
