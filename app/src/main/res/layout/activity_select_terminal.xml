@@ -28,37 +28,12 @@
             app:tint="?attr/editTextColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Texto Descripción -->
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/terminal_description"
-        style="@style/Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/terminal_upper_menu"
-        app:layout_constraintBottom_toTopOf="@id/terminal_recycler"
-        android:text="@string/terminal_text_begin"
-        android:gravity="center"/>
-
-    <!-- Contenido Principal -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
-        android:id="@+id/terminal_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/terminal_description"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </androidx.recyclerview.widget.RecyclerView>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="15dp"
+        android:layout_marginVertical="5dp"
         app:layout_constraintTop_toBottomOf="@id/terminal_upper_menu"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/select_terminal_button_next">
         <!-- FlexBox -->
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
@@ -97,9 +72,9 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/hugeicons__cable_car"
-                        android:layout_margin="10dp"
-                        app:layout_constraintWidth_percent="0.6"
-                        app:layout_constraintHeight_percent="0.6"
+                        android:layout_margin="5dp"
+                        app:layout_constraintWidth_percent="0.5"
+                        app:layout_constraintHeight_percent="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/select_terminal_origin_title"
@@ -115,6 +90,16 @@
                         android:gravity="center"
                         android:layout_margin="15dp"
                         app:layout_constraintTop_toBottomOf="@id/select_terminal_origin_image"/>
+                    <!-- Botón Seleccionar -->
+                    <Button
+                        android:id="@+id/select_terminal_origin_select_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/select_terminal_origin_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/terminal_button_text_select"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -148,9 +133,9 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/hugeicons__cable_car"
-                        android:layout_margin="10dp"
-                        app:layout_constraintWidth_percent="0.6"
-                        app:layout_constraintHeight_percent="0.6"
+                        android:layout_margin="5dp"
+                        app:layout_constraintWidth_percent="0.5"
+                        app:layout_constraintHeight_percent="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/select_terminal_end_title"
@@ -166,12 +151,30 @@
                         android:gravity="center"
                         android:layout_margin="15dp"
                         app:layout_constraintTop_toBottomOf="@id/select_terminal_end_image"/>
-
+                    <!-- Botón Seleccionar -->
+                    <Button
+                        android:id="@+id/select_terminal_end_select_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/select_terminal_end_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/terminal_button_text_select"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
-
         </com.google.android.flexbox.FlexboxLayout>
-
     </ScrollView>
+
+    <!-- Botón Siguiente -->
+    <Button
+        android:id="@+id/select_terminal_button_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terminal_button_text_next"
+        android:paddingHorizontal="30dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

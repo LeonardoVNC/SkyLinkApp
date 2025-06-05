@@ -1,25 +1,23 @@
 package com.example.skylink.viewmodel.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 import com.example.skylink.R
-import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_BEGIN
-import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_INPUT_END
-import com.example.skylink.model.singletons.CompanionObjects.Companion.STATIONS_MAKER
-import com.example.skylink.viewmodel.adapters.EstacionesAdapter
-import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.databinding.ActivitySelectTerminalBinding
+import com.example.skylink.databinding.DialogSelectTerminalBinding
+import com.example.skylink.model.dataClasses.Estacion
 import com.example.skylink.model.singletons.CompanionObjects.Companion.COLOR_GETTER
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_LLAMADA_SKYLINK
+import com.example.skylink.model.singletons.CompanionObjects.Companion.STATIONS_MAKER
+import com.example.skylink.viewmodel.adapters.EstacionesAdapter
+import com.example.skylink.viewmodel.clickListeners.OnStationClickListener
 
 //Activity para seleccionar las estaciones de origen y objetivo
 class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
     private lateinit var binding: ActivitySelectTerminalBinding
-    private val recyclerTerminalAdapter by lazy { EstacionesAdapter(this) }
-    private var begin: Boolean = true
     private var inputBegin: Int = -1
     private var inputEnd: Int = -1
 
@@ -28,53 +26,48 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         binding = ActivitySelectTerminalBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //Cargamos el contenido del recyclerview para mostrar todas las estaciones
-        setUpRecyclerView()
 
         //Configuración de botones y clicks
-        binding.terminalButtonBack.setOnClickListener{
-            if (begin) {
-                onBackPressed()
-            } else {
-                setBeginInput()
-            }
-        }
-    }
+        binding.terminalButtonBack.setOnClickListener{onBackPressed()}
+        binding.selectTerminalOriginSelectButton.setOnClickListener{ openTerminalDialog() }
+        binding.selectTerminalEndSelectButton.setOnClickListener{ openTerminalDialog() }
 
-    //Al hacer click en uno de los items, se guarda su contenido en los nodos a usar
-    override fun onItemClick(input: Int) {
-        if (begin) {
-            inputBegin = input
-            setEndInput()
-            Toast.makeText(this, "Seleccionada la estación de origen", Toast.LENGTH_SHORT).show()
-        } else {
-            inputEnd = input
-            if (inputBegin == inputEnd) {
-                Toast.makeText(this, "Ya se encuentra en su destino.", Toast.LENGTH_SHORT).show()
-                eraseBackStack()
+        binding.selectTerminalButtonNext.setOnClickListener{
+            if (inputBegin == -1 || inputEnd == -1) {
+                Toast.makeText(this, "Seleccione estaciones válidas por favor", Toast.LENGTH_SHORT).show()
+            } else if (inputBegin == inputEnd) {
+                Toast.makeText(this, "Ya se encuentra en su destino", Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(this, ResultActivity::class.java)
-                Toast.makeText(this, "Seleccionada la estación objetivo", Toast.LENGTH_SHORT).show()
-                intent.putExtra(ID_INPUT_BEGIN, inputBegin)
-                intent.putExtra(ID_INPUT_END, inputEnd)
                 intent.putExtra(ID_LLAMADA_SKYLINK, "Optimizar")
                 startActivity(intent)
             }
         }
     }
 
-    //Establece las variables para introducir el primer input, la estacion de origen
-    private fun setBeginInput () {
-        inputBegin = -1
-        begin = true
-        binding.terminalDescription.text = getString(R.string.terminal_text_begin)
-    }
+    fun openTerminalDialog () {
+        val dialog = Dialog(this, R.style.DialogSinFondo)
+        val binding = DialogSelectTerminalBinding.inflate(layoutInflater)
+        dialog.setContentView(binding.root)
 
-    //Establece las variables para introducir el segundo input, la estación destino
-    private fun setEndInput () {
-        inputEnd = -1
-        begin = false
-        binding.terminalDescription.text = getString(R.string.terminal_text_end)
+        //RecyclerView
+        val estacionesAdapter = EstacionesAdapter(this)
+        binding.dialogSelectTerminalRecycler.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = estacionesAdapter
+        }
+
+        val listaDeDatos = mutableListOf<Estacion>()
+        listaDeDatos.addAll(STATIONS_MAKER.loadTerminalList(this))
+        listaDeDatos.sortWith(compareBy { lineaConPrioridad[COLOR_GETTER.getColorID(it.lineas[0])] ?: Int.MAX_VALUE })
+        estacionesAdapter.addDataToList(listaDeDatos)
+
+        binding.dialogSelectTerminalButtonBack.setOnClickListener{
+            dialog.dismiss()
+        }
+
+
+        dialog.show()
     }
 
     //Valor usado para ordenar las estaciones por color
@@ -91,16 +84,7 @@ class SelectTerminalActivity : BaseActivity(), OnStationClickListener {
         R.color.plateada to 10
     )
 
-    //Función que carga todos los items del RecyclerView
-    private fun setUpRecyclerView() {
-        val listaDeDatos = mutableListOf<Estacion>()
-        listaDeDatos.addAll(STATIONS_MAKER.loadTerminalList(this))
-        //Se ordenan las estaciones por su color principal
-        listaDeDatos.sortWith(compareBy { lineaConPrioridad[COLOR_GETTER.getColorID(it.lineas[0])] ?: Int.MAX_VALUE })
-        recyclerTerminalAdapter.addDataToList(listaDeDatos)
-        binding.terminalRecycler.apply() {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = recyclerTerminalAdapter
-        }
+    override fun onItemClick(input: Int) {
+        println("Haciendo click en el item $input")
     }
 }
