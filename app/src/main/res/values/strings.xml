@@ -10,9 +10,13 @@
     <string name="main_desc_config">Configuraciones</string>
 
     <!-- Selector de estaciones -->
-    <string name="terminal_text_begin">Seleccione su estación actual</string>
-    <string name="terminal_text_end">Seleccione su estación objetivo</string>
+    <string name="terminal_text_begin">¿En qué estación se encuentra ahora?</string>
+    <string name="terminal_text_end">¿A qué estación se dirige?</string>
+    <string name="terminal_text_select">Seleccione una estación</string>
+    <string name="terminal_name_default">Sin estación seleccionada</string>
+    <string name="terminal_button_text_select">Seleccionar</string>
     <string name="item_terminal_def">Nombre de la estación</string>
+    <string name="terminal_button_text_next">Optimizar Ruta</string>
 
     <!-- Resultado -->
     <string name="result_desc">Los resultados son los siguientes:</string>

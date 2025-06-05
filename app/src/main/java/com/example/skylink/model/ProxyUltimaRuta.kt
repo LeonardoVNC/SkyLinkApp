@@ -12,6 +12,10 @@ class ProxyUltimaRuta(private val context: Context) : Optimizador {
     private lateinit var lastOptimization: RespuestaOptimizador
     private var cached = false
 
+    override fun inicializarGrafo(datosGrafo: MutableList<MutableList<Int>>?) {
+        SKYLINK_SINGLETON.getInstance(context).inicializarGrafo(datosGrafo)
+    }
+
     @Override
     override fun optimizarRuta(estacionOrigen: Int, estacionObjetivo: Int): RespuestaOptimizador {
         //Si una nueva solicitud posee los mismo parámetros que la última realizada, se devuelve desde cache
