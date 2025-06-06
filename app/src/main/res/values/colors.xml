@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores de las estaciones -->
     <color name="roja">#DD1A1A</color>
     <color name="amarilla">#FFE614</color>
     <color name="verde">#019107</color>
@@ -10,4 +11,40 @@
     <color name="azul">#3F51B5</color>
     <color name="cafe">#732F18</color>
     <color name="plateada">#9E9E9E</color>
+
+    <!-- Estilos -->
+    <!-- Light - Claro -->
+    <color name="themeLightPrimary">#FFB447</color>
+    <color name="themeLightSecondary">#F49F45</color>
+    <color name="themeLightAccent">#FFBF00</color>
+    <color name="themeLightSurface">#F1DFC9</color>
+    <color name="themeLightBackground">#F6E7D5</color>
+    <!-- Default -->
+    <color name="themeDefaultPrimary">#485199</color>
+    <color name="themeDefaultSecondary">#8aa9ce</color>
+    <color name="themeDefaultAccent">#8ABBCE</color>
+    <color name="themeDefaultSurface">#f2f3f5</color>
+    <color name="themeDefaultBackground">#FFFFFF</color>
+    <!-- Dark - Oscuro -->
+    <color name="themeDarkPrimary">#464646</color>
+    <color name="themeDarkSecondary">#AAAAAA</color>
+    <color name="themeDarkAccent">#3F86B5</color>
+    <color name="themeDarkSurface">#282828</color>
+    <color name="themeDarkBackground">#181818</color>
+    <!-- DarkTur -->
+    <color name="themeDarkTurPrimary">#309191</color>
+    <color name="themeDarkTurSecondary">#336666</color>
+    <color name="themeDarkTurAccent">#1FBBBB</color>
+    <color name="themeDarkTurSurface">#283C3C</color>
+    <color name="themeDarkTurBackground">#2B3333</color>
+    <!-- DarkPurple -->
+    <color name="themeDarkPurplePrimary">#6a1db1</color>
+    <color name="themeDarkPurpleSecondary">#5B2D86</color>
+    <color name="themeDarkPurpleAccent">#8300FF</color>
+    <color name="themeDarkPurpleSurface">#462E5C</color>
+    <color name="themeDarkPurpleBackground">#2F2B33</color>
+
+    <!-- Fonts -->
+    <color name="fontLight">#202020</color>
+    <color name="fontDark">#FFFFFF</color>
 </resources>

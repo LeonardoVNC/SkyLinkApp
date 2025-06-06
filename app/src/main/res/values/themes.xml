@@ -9,11 +9,11 @@
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">sans-serif</item>
 
-        <item name="colorPrimary">#FFB447</item>
-        <item name="colorSecondary">#F49F45</item>
-        <item name="colorAccent">#FFBF00</item>
-        <item name="android:background">#F6E7D5</item>
-        <item name="colorSurface">#F1DFC9</item>
+        <item name="colorPrimary">@color/themeLightPrimary</item>
+        <item name="colorSecondary">@color/themeLightSecondary</item>
+        <item name="colorAccent">@color/themeLightAccent</item>
+        <item name="android:background">@color/themeLightBackground</item>
+        <item name="colorSurface">@color/themeLightSurface</item>
         <item name="android:statusBarColor">?attr/colorSecondary</item>
     </style>
 
@@ -26,11 +26,11 @@
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">sans-serif</item>
 
-        <item name="colorPrimary">#485199</item>
-        <item name="colorSecondary">#8aa9ce</item>
-        <item name="colorAccent">#8ABBCE</item>
-        <item name="android:background">#FFFFFF</item>
-        <item name="colorSurface">#f2f3f5</item>
+        <item name="colorPrimary">@color/themeDefaultPrimary</item>
+        <item name="colorSecondary">@color/themeDefaultSecondary</item>
+        <item name="colorAccent">@color/themeDefaultAccent</item>
+        <item name="android:background">@color/themeDefaultBackground</item>
+        <item name="colorSurface">@color/themeDefaultSurface</item>
         <item name="android:statusBarColor">?attr/colorSecondary</item>
     </style>
 
@@ -43,27 +43,27 @@
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">sans-serif</item>
 
-        <item name="colorPrimary">#464646</item>
-        <item name="colorSecondary">#AAAAAA</item>
-        <item name="colorAccent">#3F86B5</item>
-        <item name="android:background">#181818</item>
-        <item name="colorSurface">#282828</item>
+        <item name="colorPrimary">@color/themeDarkPrimary</item>
+        <item name="colorSecondary">@color/themeDarkSecondary</item>
+        <item name="colorAccent">@color/themeDarkAccent</item>
+        <item name="android:background">@color/themeDarkBackground</item>
+        <item name="colorSurface">@color/themeDarkSurface</item>
         <item name="android:statusBarColor">?attr/colorSurface</item>
     </style>
 
     <style name="Theme.DarkTur" parent="Theme.Dark">
-        <item name="colorPrimary">#309191</item>
-        <item name="colorSecondary">#336666</item>
-        <item name="colorAccent">#1FBBBB</item>
-        <item name="android:background">#2B3333</item>
-        <item name="colorSurface">#283C3C</item>
+        <item name="colorPrimary">@color/themeDarkTurPrimary</item>
+        <item name="colorSecondary">@color/themeDarkTurSecondary</item>
+        <item name="colorAccent">@color/themeDarkTurAccent</item>
+        <item name="android:background">@color/themeDarkTurBackground</item>
+        <item name="colorSurface">@color/themeDarkTurSurface</item>
     </style>
 
     <style name="Theme.DarkPurple" parent="Theme.Dark">
-        <item name="colorPrimary">#6a1db1</item>
-        <item name="colorSecondary">#5B2D86</item>
-        <item name="colorAccent">#8300FF</item>
-        <item name="android:background">#2F2B33</item>
-        <item name="colorSurface">#462E5C</item>
+        <item name="colorPrimary">@color/themeDarkPurplePrimary</item>
+        <item name="colorSecondary">@color/themeDarkPurpleSecondary</item>
+        <item name="colorAccent">@color/themeDarkPurpleAccent</item>
+        <item name="android:background">@color/themeDarkPurpleBackground</item>
+        <item name="colorSurface">@color/themeDarkPurpleSurface</item>
     </style>
 </resources>
