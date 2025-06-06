@@ -1,39 +1,39 @@
 package com.example.skylink.viewmodel.activities
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.TypedValue
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skylink.R
 import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
 import com.example.skylink.model.singletons.CompanionObjects.Companion.SELECTED_THEME
 import com.example.skylink.databinding.ActivitySelectThemeBinding
 import com.example.skylink.model.dataClasses.Tema
+import com.example.skylink.model.singletons.CompanionObjects.Companion.TEMPORAL_THEME
 import com.example.skylink.viewmodel.adapters.TemasAdapter
 import com.example.skylink.viewmodel.clickListeners.OnThemeClickListener
 
 //Activity que sirve para seleccionar el tema usado en la app
-class SelectThemeActivity : BaseActivity(), OnThemeClickListener {
+class SelectThemeActivity : AppCompatActivity(), OnThemeClickListener {
     private lateinit var binding: ActivitySelectThemeBinding
     private val recyclerThemeAdapter by lazy { TemasAdapter(this) }
-    //Por defecto se usa el tema Default
-    private var tema: Int = 0
+    private var temporalTheme = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        temporalTheme = sharedPreferences.getInt(TEMPORAL_THEME, R.style.Theme_Default)
+        setTheme(temporalTheme)
         super.onCreate(savedInstanceState)
+
         binding = ActivitySelectThemeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         setUpRecyclerView()
 
-        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        tema = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)
-
         //Configuración de botones y clicks
         binding.selectThemeButtonSave.setOnClickListener {
-            sharedPreferences.edit().putInt(SELECTED_THEME, tema).apply()
-            println("Ahora es ${sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)}")
+            sharedPreferences.edit().putInt(SELECTED_THEME, temporalTheme).apply()
+            sharedPreferences.edit().putInt(TEMPORAL_THEME, temporalTheme).apply()
             eraseBackStack()
         }
         binding.selectThemeButtonBack.setOnClickListener { onBackPressed() }
@@ -82,9 +82,25 @@ class SelectThemeActivity : BaseActivity(), OnThemeClickListener {
 
     //Al hacer click en uno de los items, se sobreescribe la información del tema seleccionado
     override fun onItemClick(theme: Tema) {
-        println(theme.themeID)
-        tema = theme.themeID
-        binding.selectThemeDescSave.text = theme.nombre
-        binding.selectThemeDescSave.visibility = View.VISIBLE
+        temporalTheme = theme.themeID
+
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        sharedPreferences.edit().putInt(TEMPORAL_THEME, temporalTheme).apply()
+        recreate()
+    }
+
+    //Función para limpiar el BackStack y volver a la primera pantalla
+    fun eraseBackStack() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    //Se sobreescribe el uso de onBackPressed para evitar errores con el tema seleccionado
+    override fun onBackPressed() {
+        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
+        val tema = sharedPreferences.getInt(SELECTED_THEME, R.style.Theme_Default)
+        sharedPreferences.edit().putInt(TEMPORAL_THEME, tema).apply()
+        super.onBackPressed()
     }
 }

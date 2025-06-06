@@ -53,36 +53,13 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:text="@string/desc_save_theme"
-                android:textStyle="italic|bold" />
-            <TextView
-                android:id="@+id/select_theme_desc_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:text="@string/theme_dark_tur"
-                android:textStyle="italic|bold"
-                android:visibility="gone" />
-        </LinearLayout>
 
         <!-- Boton de guardado -->
         <Button
             android:id="@+id/select_theme_button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/save_themes" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

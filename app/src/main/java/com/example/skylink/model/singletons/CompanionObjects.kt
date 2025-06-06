@@ -9,6 +9,7 @@ class CompanionObjects {
     companion object {
         val APP_PREFERENCES = "app_preferences"
         val SELECTED_THEME = "selected_theme"
+        val TEMPORAL_THEME = "temporal_theme"
         val ID_USER_TYPE = "user_type"
         val ID_SELECTED_PRICE = "selected_price"
         val ID_INPUT_BEGIN = "INPUT_BEGIN"
