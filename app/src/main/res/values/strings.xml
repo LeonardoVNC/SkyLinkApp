@@ -46,6 +46,7 @@
     <string name="theme_dark_purple">Morado (Oscuro)</string>
     <string name="theme_dark">Oscuro</string>
     <string name="theme_light">Claro</string>
+    <string name="theme_text_default">Tema Default</string>
 
     <!-- Dialog Info estaciones -->
     <string name="dialog_terminal_pre_title">Estación</string>
