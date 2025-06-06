@@ -13,12 +13,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/theme_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorSurface"
             android:padding="12dp">
             <!-- Titulo -->
             <TextView
+                android:id="@+id/theme_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Subtitle"
