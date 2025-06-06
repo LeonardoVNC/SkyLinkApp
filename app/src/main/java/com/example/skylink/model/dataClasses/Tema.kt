@@ -7,5 +7,6 @@ data class Tema(
     val colorPrimarioID: Int,
     val colorSecundarioID: Int,
     val colorAccentID: Int,
-    val colorSurface: Int
+    val colorSurface: Int,
+    val colorFont: Int
 )

@@ -32,6 +32,7 @@ class TemasAdapter(private val listener: OnThemeClickListener): RecyclerView.Ada
             binding.themeColorSecondary.setBackgroundColor(data.colorSecundarioID)
             binding.themeColorAccent.setBackgroundColor(data.colorAccentID)
             binding.themeItem.setBackgroundColor(data.colorSurface)
+            binding.themeTitle.setTextColor(data.colorFont)
 
             //Listener
             binding.root.setOnClickListener {
