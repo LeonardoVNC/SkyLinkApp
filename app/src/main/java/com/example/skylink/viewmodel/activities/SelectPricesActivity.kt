@@ -1,14 +1,18 @@
 package com.example.skylink.viewmodel.activities
 
+import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skylink.R
 import com.example.skylink.viewmodel.clickListeners.OnPriceClickListener
 import com.example.skylink.viewmodel.adapters.PreciosAdapter
 import com.example.skylink.model.dataClasses.Precios
 import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_SELECTED_PRICE
 import com.example.skylink.databinding.ActivitySelectPricesBinding
+import com.example.skylink.databinding.DialogConfirmationBinding
 import com.example.skylink.viewmodel.observerPattern.PriceObserver
 import com.example.skylink.viewmodel.observerPattern.PriceSubject
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ASSET_READER
@@ -69,7 +73,19 @@ class SelectPricesActivity : BaseActivity() , PriceSubject, OnPriceClickListener
     override fun onItemClick(titulo: String) {
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
         sharedPreferences.edit().putString(ID_SELECTED_PRICE, titulo).apply()
-        Toast.makeText(this, "Seleccionado precio para: ${titulo}", Toast.LENGTH_SHORT).show()
+
+        // Configuración del Dialog
+        val dialog = Dialog(this, R.style.DialogSinFondo)
+        val binding = DialogConfirmationBinding.inflate(layoutInflater)
+        dialog.setContentView(binding.root)
+        // Descripción del dialog
+        val preDesc = ContextCompat.getString(this, R.string.dialog_confirm_text_price)
+        binding.dialogConfirmDesc.text = "$preDesc\n$titulo"
+        binding.dialogConfirmButtonAccept.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
+
         //También se notifica a los observers, ya que el cambio en precios genera cambio en
         // el monto de las rutas ya calculadas
         notifyObservers()
