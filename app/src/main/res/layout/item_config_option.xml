@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/config_option_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="14dp"
+        android:background="?attr/colorSurface"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/config_option_title"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:text="@string/config_price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <ImageButton
+            android:id="@+id/config_button_price"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorAccent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Separador -->
+    <LinearLayout
+        android:id="@+id/config_option_lower_sep"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?attr/colorSecondary"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/config_option_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
