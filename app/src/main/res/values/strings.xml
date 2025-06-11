@@ -33,6 +33,7 @@
     <string name="item_price_transboard">Precio transbordo:</string>
 
     <!-- Configuraciones -->
+    <string name="config_default">Opciones</string>
     <string name="config_price">Establecer precios</string>
     <string name="config_theme">Cambiar tema</string>
     <string name="config_dev">Opciones de desarrollo</string>

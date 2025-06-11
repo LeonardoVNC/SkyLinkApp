@@ -2,13 +2,17 @@ package com.example.skylink.viewmodel.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skylink.R
+import com.example.skylink.databinding.ActivityConfiguracionesBinding
+import com.example.skylink.model.dataClasses.ConfigOption
 import com.example.skylink.model.singletons.CompanionObjects.Companion.APP_PREFERENCES
 import com.example.skylink.model.singletons.CompanionObjects.Companion.ID_USER_TYPE
-import com.example.skylink.databinding.ActivityConfiguracionesBinding
+import com.example.skylink.viewmodel.adapters.ConfigurationAdapter
+import com.example.skylink.viewmodel.clickListeners.OnConfigClickListener
 
 //Activity usada para mostrar las opciones de configuración disponibles
-class ConfiguracionesActivity : BaseActivity() {
+class ConfiguracionesActivity : BaseActivity(), OnConfigClickListener {
     private lateinit var binding: ActivityConfiguracionesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,26 +20,35 @@ class ConfiguracionesActivity : BaseActivity() {
         binding = ActivityConfiguracionesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setUpRecyclerView()
+    }
 
-        //Si las opciones de desarrollador están activadas, se muestra la opción para entrar a dicho menú
-        val sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        if (sharedPreferences.getInt(ID_USER_TYPE, 0) == 1) {
-            binding.configDev.visibility = View.VISIBLE
-        }
-
-        //Configuración de botones y clicks
-        binding.configButtonBack.setOnClickListener { onBackPressed() }
-        binding.configButtonPrice.setOnClickListener {
-            val intent = Intent(this, SelectPricesActivity::class.java)
-            startActivity(intent)
-        }
-        binding.configButtonTheme.setOnClickListener {
-            val intent = Intent(this, SelectThemeActivity::class.java)
-            startActivity(intent)
-        }
-        binding.configButtonDev.setOnClickListener {
-            val intent = Intent(this, DevActivity::class.java)
-            startActivity(intent)
+    private fun setUpRecyclerView() {
+        val listaDeDatos = mutableListOf(
+            ConfigOption(
+                getString(R.string.config_price),
+                0,
+                Intent(this, SelectPricesActivity::class.java)
+            ),
+            ConfigOption(
+                getString(R.string.config_theme),
+                0,
+                Intent(this, SelectThemeActivity::class.java)
+            ),
+            ConfigOption(
+                getString(R.string.config_dev),
+                1,
+                Intent(this, DevActivity::class.java)
+            ),
+        )
+        val userType = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).getInt(ID_USER_TYPE, 0)
+        val recyclerConfigurationAdapter by lazy { ConfigurationAdapter(this, userType) }
+        recyclerConfigurationAdapter.addDataToList(listaDeDatos)
+        binding.configRecycler.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = recyclerConfigurationAdapter
         }
     }
+
+    override fun onConfigClick(intent: Intent) = startActivity(intent)
 }
